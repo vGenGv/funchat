@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    name: funchat
+    url: jdbc:mysql://localhost:3306/funchat
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    static-path-pattern: /**
+
+mybatis:
+  type-aliases-package: com.shixun.entity
+  mapper-locations: classpath:mapper/*.xml
