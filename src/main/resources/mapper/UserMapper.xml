@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixun.funchat.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.shixun.funchat.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="telephone" jdbcType="DECIMAL" property="telephone" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="geder" jdbcType="CHAR" property="geder" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="per_signature" jdbcType="VARCHAR" property="perSignature" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, telephone, icon, geder, birthday, addr, mail, per_signature
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fun_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+<!--  根据用户名和密码登录-->
+  <select id="selectByName" parameterType="com.shixun.funchat.entity.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fun_user
+    where username = #{username,jdbcType=VARCHAR}
+    and password = #{password,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fun_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shixun.funchat.entity.User">
+    insert into fun_user (id, username, password, 
+      telephone, icon, geder, 
+      birthday, addr, mail, 
+      per_signature)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=DECIMAL}, #{icon,jdbcType=VARCHAR}, #{geder,jdbcType=CHAR}, 
+      #{birthday,jdbcType=DATE}, #{addr,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, 
+      #{perSignature,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shixun.funchat.entity.User">
+    insert into fun_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="geder != null">
+        geder,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="perSignature != null">
+        per_signature,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=DECIMAL},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="geder != null">
+        #{geder,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="perSignature != null">
+        #{perSignature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shixun.funchat.entity.User">
+    update fun_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=DECIMAL},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="geder != null">
+        geder = #{geder,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="addr != null">
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="perSignature != null">
+        per_signature = #{perSignature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shixun.funchat.entity.User">
+    update fun_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=DECIMAL},
+      icon = #{icon,jdbcType=VARCHAR},
+      geder = #{geder,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      addr = #{addr,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      per_signature = #{perSignature,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
