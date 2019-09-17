@@ -1,49 +1,22 @@
 package com.shixun.funchat.service;
 
-import com.shixun.funchat.dao.UserMapper;
 import com.shixun.funchat.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserService implements UserMapper {
-    @Autowired
-    private UserMapper userMapper;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
-    @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return userMapper.deleteByPrimaryKey(id);
-    }
+public interface UserService {
 
-    @Override
-    public int insert(User user) {
-        return userMapper.insert(user);
-    }
+    //登录函数
+    Map<String, String> login(User user, HttpSession session);
 
-    @Override
-    public int insertSelective(User user) {
-        return userMapper.insertSelective(user);
-    }
+    //注册函数
+    Map<String, String> register(User user, HttpSession session);
 
-    @Override
-    public User selectByPrimaryKey(Integer id) {
-        return userMapper.selectByPrimaryKey(id);
-    }
+    //查看个人资料
+    User userinfo(User user);
 
-    @Override
-    public int updateByPrimaryKeySelective(User user) {
-        return userMapper.updateByPrimaryKeySelective(user);
-    }
-
-    @Override
-    public int updateByPrimaryKey(User user) {
-        return userMapper.updateByPrimaryKey(user);
-    }
-
-    @Override
-    public User selectByName(User user) {
-        return userMapper.selectByName(user);
-    }
-
-
+    //修改个人资料
+    Map<String, String> edituser(User user);
 }

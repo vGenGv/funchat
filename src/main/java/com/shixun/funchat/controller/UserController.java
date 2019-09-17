@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -25,16 +25,18 @@ public class UserController {
 //    根据用户名和密码登录
     @PostMapping("/login")
     @ResponseBody
-    public Map<String, String> login(@RequestBody User user1, HttpSession session){
-//        System.out.println(user1.getUsername());//测试后台接收数据
-        User user = userService.selectByName(user1);
-        Map<String, String> map = new HashMap<>();
-        if (user !=null){
-            session.setAttribute("USER_SESSION", user);//登录成功，加入session
-            map.put("msg","登录成功 欢迎您 "+user.getUsername()+" !");
-        }
-        else map.put("msg","用户名或密码错误！");
+    public Map<String, String> login(@RequestBody User user, HttpSession session){
+        Map<String, String> map;
+        map = userService.login(user,session);
         return map;
+    }
+
+    //退出登录
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        // 移除session
+        session.removeAttribute("USER_SESSION");
+        return "redirect:/login";
     }
 
     //跳转注册页面
@@ -44,15 +46,29 @@ public class UserController {
     // 注册，上传数据库
     @PostMapping("/register")
     @ResponseBody
-    public Map<String, String> register(@RequestBody User user1, HttpSession session){
-        System.out.println(user1.getUsername());//测试后台接收数据
-        int state = userService.insertSelective(user1);
-        Map<String, String> map = new HashMap<>();
-        if (state !=0){
-            session.setAttribute("USER_SESSION", user1);//注册成功，加入session
-            map.put("msg","注册成功 欢迎您 "+user1.getUsername()+" !");
-        }
-        else map.put("msg","注册失败");
+    public Map<String, String> register(@RequestBody User user, HttpSession session){
+        Map<String, String> map;
+        map = userService.register(user,session);
         return map;
     }
+
+    //查看个人资料
+    @GetMapping("/userinfo")
+    @ResponseBody
+    public User userinfo(HttpServletRequest request){
+        HttpSession session=request.getSession();
+        User user = (User) session.getAttribute("USER_SESSION");
+        user = userService.userinfo(user);
+        return user;
+    }
+
+    //修改个人资料
+    @PostMapping("/edituser")
+    @ResponseBody
+    public  Map<String, String> edituser(@RequestBody User user){
+        Map<String, String> map;
+        map = userService.edituser(user);
+        return map;
+    }
+
 }

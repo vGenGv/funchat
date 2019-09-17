@@ -1,7 +1,9 @@
 package com.shixun.funchat.dao;
 
 import com.shixun.funchat.entity.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
