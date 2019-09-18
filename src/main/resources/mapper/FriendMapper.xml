@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixun.funchat.dao.FriendMapper">
+  <resultMap id="BaseResultMap" type="com.shixun.funchat.entity.Friend">
+    <id column="friendA_id" jdbcType="INTEGER" property="friendaId" />
+    <id column="friendB_id" jdbcType="INTEGER" property="friendbId" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapUser" type="com.shixun.funchat.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="telephone" jdbcType="DECIMAL" property="telephone" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="geder" jdbcType="CHAR" property="geder" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="per_signature" jdbcType="VARCHAR" property="perSignature" />
+  </resultMap>
+
+  <select id="selectByFriendId" parameterType="java.lang.Integer" resultMap="BaseResultMapUser">
+    select u.*
+    from friend f,fun_user u
+    where f.friendA_id = #{id,jdbcType=INTEGER} and f.friendB_id = u.id
+    or f.friendB_id = #{id,jdbcType=INTEGER} and f.friendA_id = u.id
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="com.shixun.funchat.entity.Friend">
+    delete from friend
+    where friendA_id = #{friendaId,jdbcType=INTEGER}
+      and friendB_id = #{friendbId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shixun.funchat.entity.Friend">
+    insert into friend (friendA_id, friendB_id)
+    values (#{friendaId,jdbcType=INTEGER}, #{friendbId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shixun.funchat.entity.Friend">
+    insert into friend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="friendaId != null">
+        friendA_id,
+      </if>
+      <if test="friendbId != null">
+        friendB_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="friendaId != null">
+        #{friendaId,jdbcType=INTEGER},
+      </if>
+      <if test="friendbId != null">
+        #{friendbId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

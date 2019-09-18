@@ -6,7 +6,8 @@
     <title>修改个人资料页面</title>
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
-        function edituser() {
+
+    function edituser() {
             // 获取输入的用户名和密码
             var id=$("#id").val();
             var username = $("#username").val();
@@ -42,6 +43,7 @@
 <form >
     用户id：<input readonly type="text" name="id" id="id" th:value="${user.id}"/><br/>
     用户昵称：<input type="text" name="username" id="username" th:value="${user.username}"><br/>
+    头 像：<a> <img th:src="${user.icon}"/></a><br />
     密&nbsp;&nbsp;&nbsp;码：<input type="text" name="password" id="password" th:value="${user.password}"><br/>
     手机号：<input type="text" name="telephone" id="telephone" th:value="${user.telephone}"><br/>
     性别：<input type="text" name="geder" id="geder" th:value="${user.geder}"><br/>

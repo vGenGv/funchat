@@ -1,4 +1,4 @@
-package com.shixun.funchat.service.Impl;
+package com.shixun.funchat.service.impl;
 
 import com.shixun.funchat.dao.UserMapper;
 import com.shixun.funchat.entity.User;
@@ -6,7 +6,6 @@ import com.shixun.funchat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +36,7 @@ public class UserServiceImpl implements UserService {
         int state = userMapper.insertSelective(user);
         Map<String, String> map = new HashMap<>();
         if (state !=0){
+            user = userMapper.selectByName(user);
             session.setAttribute("USER_SESSION", user);//注册成功，加入session
             map.put("msg","注册成功 欢迎您 "+user.getUsername()+" !");
         }
@@ -44,12 +44,12 @@ public class UserServiceImpl implements UserService {
         return map;
     }
 
-    //查看个人资料
-    @Override
-    public User userinfo(User user) {
-        user = userMapper.selectByName(user);
-        return user;
-    }
+//    //查看个人资料
+//    @Override
+//    public User userinfo(User user) {
+//        user = userMapper.selectByName(user);
+//        return user;
+//    }
 
     //修改个人资料
     @Override
