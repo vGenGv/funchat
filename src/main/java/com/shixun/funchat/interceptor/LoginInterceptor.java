@@ -57,6 +57,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         url.add("/");           //主页
         url.add("/login");      //登录页
         url.add("/register");   //注册页
+        url.add("/error");
 
         //网站静态资源
         url.add("/css/**");

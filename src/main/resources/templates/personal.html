@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>注册页面</title>
+    <title>修改个人资料页面</title>
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
-        function register() {
+        function edituser() {
             // 获取输入的用户名和密码
+            var id=$("#id").val();
             var username = $("#username").val();
             var password = $("#password").val();
             var telephone = $("#telephone").val();
+            var geder = $("#geder").val();
+            var birthday = $("#birthday").val();
+            var addr = $("#addr").val();
+            var mail = $("#mail").val();
+            var perSignature = $("#perSignature").val();
             $.ajax({
-                url: "/register",
+                url: "/edituser",
                 type: "post",
                 // data表示发送的数据
-                data: JSON.stringify({username: username, password: password,telephone:telephone}),
+                data: JSON.stringify({id:id,username: username, password: password,telephone:telephone,
+                    geder:geder,birthday:birthday,addr:addr,mail:mail,perSignature:perSignature}),
                 // 定义发送请求的数据格式为JSON字符串
                 contentType: "application/json;charset=UTF-8",
                 //定义回调响应的数据格式为JSON字符串,该属性可以省略
@@ -31,11 +39,17 @@
 
 </head>
 <body>
-<form>
-    用户昵称：<input type="text" name="username" id="username"><br/>
-    密&nbsp;&nbsp;&nbsp;码：<input type="password" name="password" id="password"><br/>
-    手机号：<input type="text" name="telephone" id="telephone"><br/>
-    <input type="button" value="注册" onclick=" register()"/>
+<form >
+    用户id：<input readonly type="text" name="id" id="id" th:value="${user.id}"/><br/>
+    用户昵称：<input type="text" name="username" id="username" th:value="${user.username}"><br/>
+    密&nbsp;&nbsp;&nbsp;码：<input type="text" name="password" id="password" th:value="${user.password}"><br/>
+    手机号：<input type="text" name="telephone" id="telephone" th:value="${user.telephone}"><br/>
+    性别：<input type="text" name="geder" id="geder" th:value="${user.geder}"><br/>
+    出生日期：<input type="text" name="birthday" id="birthday" th:value="${#dates.format(user.birthday, 'yyyy-MM-dd')}"><br/>
+    地 址：<input type="text" name="addr" id="addr" th:value="${user.addr}"><br/>
+    邮箱：<input type="text" name="mail" id="mail" th:value="${user.mail}"><br/>
+    个人签名：<input type="text" name="perSignature" id="perSignature" th:value="${user.perSignature}"><br/>
+    <input type="button" value="修改" onclick=" edituser()"/>
 </form>
 </body>
 <script>window.jQuery || document.write('<script src="/js/jquery-3.4.1.min.js"><\/script>')</script>

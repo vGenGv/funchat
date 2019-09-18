@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     //登录函数
     @Override
     public Map<String, String> login(User user, HttpSession session){
-        System.out.println(user.getUsername());//测试后台接收数据
+        System.out.println("登录: "+user.getUsername());//测试后台接收数据
         User user1 = userMapper.selectByName(user);
         Map<String, String> map = new HashMap<>();
         if (user1 !=null){

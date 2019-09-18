@@ -2,8 +2,11 @@ package com.shixun.funchat.controller;
 
 import com.shixun.funchat.entity.User;
 import com.shixun.funchat.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +18,8 @@ import java.util.Map;
 
 @Controller
 public class UserController {
+    private static Logger log= LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
 
@@ -54,12 +59,13 @@ public class UserController {
 
     //查看个人资料
     @GetMapping("/userinfo")
-    @ResponseBody
-    public User userinfo(HttpServletRequest request){
+    public String userinfo(Model model,HttpServletRequest request){
         HttpSession session=request.getSession();
         User user = (User) session.getAttribute("USER_SESSION");
         user = userService.userinfo(user);
-        return user;
+        System.out.println("查看个人资料用户: "+user.getUsername());
+        model.addAttribute("user",user);
+        return "personal";
     }
 
     //修改个人资料
@@ -67,6 +73,7 @@ public class UserController {
     @ResponseBody
     public  Map<String, String> edituser(@RequestBody User user){
         Map<String, String> map;
+        System.out.println("修改用户id: "+user.getId());
         map = userService.edituser(user);
         return map;
     }
