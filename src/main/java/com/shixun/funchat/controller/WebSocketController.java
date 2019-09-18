@@ -4,142 +4,90 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.*;
 
-import javax.websocket.*;
-import javax.websocket.server.PathParam;
-import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * WebSocket 控制器
  */
-@ServerEndpoint("/websocket/{userId}")
 @Component
-public class WebSocketController {
+public class WebSocketController implements WebSocketHandler {
+    private static Logger log = LoggerFactory.getLogger(WebSocketController.class);
 
-    //在线人数 需要线程安全
-    private static int onlineCount = 0;
     //连接表
-    private static ConcurrentHashMap<String, WebSocketController> websocketList = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, WebSocketSession> websocketList = new ConcurrentHashMap<>();
 
-    //与客户端的连接会话
-    private Session session;
-    //接收用户 ID
-    private String userId = "";
-
-    /**
-     * 连接打开回调
-     */
-    @OnOpen
-    public void open(Session session, @PathParam("userId") String userId) {
-        this.session = session;
-        this.userId = userId;
-        websocketList.put(userId, this);
-        addOnlineCount();
-        System.out.println("新窗口监听：" + userId + "，当前在线人数：" + getOnlineCount());
-        try {
-            sendMessage(JSON.toJSONString("连接成功"));
-        } catch (IOException e) {
-            System.out.println("websocket IO异常");
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        String userID = getUserID(session);
+        if (StringUtils.isNotBlank(userID)) {
+            websocketList.put(userID, session);
+            log.debug("新连接，用户ID：" + userID + "，当前人数：" + websocketList.size());
+        } else {
+            log.debug("userID 为空");
         }
     }
 
-    /**
-     * 连接关闭回调
-     */
-    @OnClose
-    public void onClose() {
-        if (websocketList.get(this.userId) != null) {
-            websocketList.remove(this.userId);
-            subOnlineCount();
-            System.out.println("一连接关闭！当前在线人数：" + getOnlineCount());
-        }
-    }
-
-    /**
-     * 收到客户端消息后调用的方法
-     *
-     * @param message 客户端发送过来的消息
-     */
-    @OnMessage
-    public void onMessage(String message, Session session) {
-        System.out.println("收到来自窗口"+userId+"的信息:"+message);
-        if(StringUtils.isNotBlank(message)){
-            JSONArray list=JSONArray.parseArray(message);
-            for (int i = 0; i < list.size(); i++) {
-                try {
-                    //解析发送的报文
-                    JSONObject object = list.getJSONObject(i);
-                    String toUserId=object.getString("toUserId");
-                    String contentText=object.getString("contentText");
-                    object.put("fromUserId",this.userId);
-                    //传送给对应用户的websocket
-                    if(StringUtils.isNotBlank(toUserId)&&StringUtils.isNotBlank(contentText)){
-                        WebSocketController socketx=websocketList.get(toUserId);
-                        //需要进行转换，userId
-                        if(socketx!=null){
-                            socketx.sendMessage(JSON.toJSONString(object));
-                            //此处可以放置相关业务代码，例如存储到数据库
-                        }
+    @Override
+    public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+        String msgs = (String) message.getPayload();
+        if (StringUtils.isNotBlank(msgs)) {
+            log.debug("收到消息：" + msgs);
+            JSONArray json_msgs = JSON.parseArray(msgs);
+            for (int i = 0; i < json_msgs.size(); i++) {
+                JSONObject json_msg = json_msgs.getJSONObject(i);
+                String toUserID = json_msg.getString("toUserID");
+                String contentText = json_msg.getString("contentText");
+                if (StringUtils.isNotBlank(toUserID) && StringUtils.isNotBlank(contentText)) {
+                    WebSocketSession toSession = websocketList.get(toUserID);
+                    if (toSession != null) {
+                        json_msg.put("fromUserID", getUserID(session));
+                        toSession.sendMessage(new TextMessage(JSON.toJSONString(json_msg)));
+                    }else{
+                        log.debug("目标不存在");
                     }
-                }catch (Exception e){
-                    e.printStackTrace();
+                }else{
+                    log.debug("空 ID 或空内容");
                 }
             }
+        }else{
+            log.debug("空消息");
         }
     }
 
-    /**
-     *
-     * @param session
-     * @param error
-     */
-    @OnError
-    public void onError(Session session, Throwable error) {
-        System.out.println("发生错误");
-        error.printStackTrace();
-    }
-
-    /**
-     * 实现服务器主动推送
-     */
-    public void sendMessage(String message) throws IOException {
-        this.session.getBasicRemote().sendText(message);
-    }
-
-    /**
-     * 群发自定义消息
-     * */
-    /*public static void sendInfo(String message,@PathParam("userId") String userId) throws IOException {
-        log.info("推送消息到窗口"+userId+"，推送内容:"+message);
-        for (ImController item : webSocketSet) {
-            try {
-                //这里可以设定只推送给这个sid的，为null则全部推送
-                if(userId==null) {
-                    item.sendMessage(message);
-                }else if(item.userId.equals(userId)){
-                    item.sendMessage(message);
-                }
-            } catch (IOException e) {
-                continue;
-            }
+    @Override
+    public void handleTransportError(WebSocketSession session, Throwable throwable) throws Exception {
+        if (session.isOpen()) {
+            session.close();
         }
-    }*/
-
-    public static int getOnlineCount() {
-        return onlineCount;
+        String userID = getUserID(session);
+        if (userID != null)
+            websocketList.remove(userID);
+        log.error("连接错误");
     }
 
-    public static int addOnlineCount() {
-        WebSocketController.onlineCount++;
-        return onlineCount;
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
+        String userID = getUserID(session);
+        if (userID != null)
+            websocketList.remove(userID);
+        log.debug("连接关闭，用户ID：" + userID + "，当前人数：" + websocketList.size());
     }
 
-    public static int subOnlineCount() {
-        WebSocketController.onlineCount--;
-        return onlineCount;
+    @Override
+    public boolean supportsPartialMessages() {
+        return false;
     }
 
+    private String getUserID(WebSocketSession session) {
+        try {
+            return (String) session.getAttributes().get("userID");
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
