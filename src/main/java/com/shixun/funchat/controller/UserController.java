@@ -25,7 +25,8 @@ public class UserController {
 
 //    跳转登录页面
     @GetMapping("/login")
-    public String tologin(){ return "test_login";}
+    public String tologin(){
+        return "test_login";}
 
 //    根据用户名和密码登录
     @PostMapping("/login")
@@ -63,7 +64,7 @@ public class UserController {
         HttpSession session=request.getSession();
         User user = (User) session.getAttribute("USER_SESSION");//从session中直接获得
 //        user = userService.userinfo(user);
-        System.out.println("查看个人资料用户: "+user.getUsername());
+        log.debug("查看个人资料用户: "+user.getUsername());
         model.addAttribute("user",user);
         return "test_personal";
     }
@@ -71,10 +72,10 @@ public class UserController {
     //修改个人资料
     @PostMapping("/edituser")
     @ResponseBody
-    public  Map<String, String> edituser(@RequestBody User user){
+    public  Map<String, String> edituser(@RequestBody User user, HttpSession session){
         Map<String, String> map;
-        System.out.println("修改用户id: "+user.getId());
-        map = userService.edituser(user);
+        log.debug("修改用户id: "+user.getId());
+        map = userService.edituser(user,session);
         return map;
     }
 

@@ -17,5 +17,5 @@ public interface UserService {
 //    User userinfo(User user);
 
     //修改个人资料
-    Map<String, String> edituser(User user);
+    Map<String, String> edituser(User user, HttpSession session);
 }

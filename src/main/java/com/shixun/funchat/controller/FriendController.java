@@ -18,11 +18,11 @@ public class FriendController {
     private FriendService friendService;
 
     @GetMapping("/listfriend")
-    @ResponseBody
-    public List<User> toListfriend(Model model, HttpServletRequest request){
+    public String toListfriend(Model model, HttpServletRequest request){
         HttpSession session=request.getSession();
         User user = (User) session.getAttribute("USER_SESSION");
         List<User> users=friendService.listfriend(user.getId());
-        return users;
+        model.addAttribute("users",users);
+        return "test_listfriend";
     }
 }
