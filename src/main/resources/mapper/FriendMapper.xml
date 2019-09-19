@@ -29,9 +29,10 @@
 
   <delete id="deleteByPrimaryKey" parameterType="com.shixun.funchat.entity.Friend">
     delete from friend
-    where friendA_id = #{friendaId,jdbcType=INTEGER}
-      and friendB_id = #{friendbId,jdbcType=INTEGER}
+    where friendA_id = #{friendaId,jdbcType=INTEGER} and friendB_id = #{friendbId,jdbcType=INTEGER}
+    or friendA_id = #{friendbId,jdbcType=INTEGER} and friendB_id = #{friendaId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.shixun.funchat.entity.Friend">
     insert into friend (friendA_id, friendB_id)
     values (#{friendaId,jdbcType=INTEGER}, #{friendbId,jdbcType=INTEGER})
