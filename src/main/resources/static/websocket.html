@@ -41,7 +41,7 @@
                 if (typeof (WebSocket) == "undefined") {
                     console.log("sendMessage: 您的浏览器不支持WebSocket");
                 } else {
-                    var msg = '[{"toUserID":"' + $("#toUserId").val() + '","contentText":"' + $("#contentText").val() + '"}]';
+                    var msg = '[{"toGroupID":"' + $("#toGroupId").val() + '","contentText":"' + $("#contentText").val() + '"}]';
                     console.log("发送消息：" + msg);
                     socket.send(msg);
                 }
@@ -50,32 +50,27 @@
     </head>
 
     <body>
-        <p>
         <div>
             <label for="userId">【userId】：</label>
         </div>
         <div>
-            <input id="userId" name="userId" type="text" value="25">
+            <input id="userId" name="userId" type="text" value="1">
         </div>
-        <p>
-        <div>
-            <label for="toUserId">【toUserId】：</label>
-        </div>
-        <div>
-            <input id="toUserId" name="toUserId" type="text" value="26">
-        </div>
-        <p>
-        <p>
         <div>
             <button onclick="openSocket()">开启socket</button>
+        </div>
+        <div>
+            <label for="toGroupId">【toGroupId】：</label>
+        </div>
+        <div>
+            <input id="toGroupId" name="toGroupId" type="text" value="1">
         </div>
         <div>
             <label for="contentText">【contentText】：</label>
         </div>
         <div>
-            <input id="contentText" name="contentText" type="text" value="嗷嗷嗷">
+            <input id="contentText" name="contentText" type="text" value="Hello, funchat!">
         </div>
-        <p>
         <div>
             <button onclick="sendMessage()">发送消息</button>
         </div>
