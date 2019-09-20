@@ -58,7 +58,7 @@ public class WebSocketController implements WebSocketHandler {
                 return;
             }
             //获取组内成员 ID
-            List<Integer> group_users = groupService.getGroupMember(toGroupID);
+            List<Integer> group_users = groupService.getGroupMemberByGroupId(toGroupID);
             if (group_users.size() == 0) {
                 log.debug("群聊不存在");
                 return;

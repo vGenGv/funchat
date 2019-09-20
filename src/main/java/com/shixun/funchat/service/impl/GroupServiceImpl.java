@@ -4,6 +4,8 @@ import com.shixun.funchat.dao.ChatGroupMapper;
 import com.shixun.funchat.entity.ChatGroup;
 import com.shixun.funchat.dao.GroupStructureMapper;
 import com.shixun.funchat.service.GroupService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,22 +13,40 @@ import java.util.List;
 
 @Service
 public class GroupServiceImpl implements GroupService {
-    @Autowired
-    private ChatGroupMapper groupMapper;
+    private static Logger log = LoggerFactory.getLogger(GroupServiceImpl.class);
 
     @Autowired
-    private GroupStructureMapper groupStructureMapper;
+    private GroupStructureMapper groupStructureMapper; //群结构表mapper
+    @Autowired
+    private ChatGroupMapper chatGroupMapper; //群表mapper
 
     //查找群
     @Override
     public List<ChatGroup> search(ChatGroup group) {
-        List<ChatGroup> groups = groupMapper.selectByIdOrName(group);
+        List<ChatGroup> groups = chatGroupMapper.selectByIdOrName(group);
         return groups;
     }
 
 
+    /**
+     * 获取用户 ID 加入的所有群聊
+     *
+     * @param userId 用户 ID
+     * @return 群聊数组
+     */
     @Override
-    public List<Integer> getGroupMember(int grop_id) {
+    public List<ChatGroup> getChatGroupByUserId(int userId) {
+        return chatGroupMapper.selectChatGroupByUserId(userId);
+    }
+
+    /**
+     * 获取
+     *
+     * @param grop_id
+     * @return
+     */
+    @Override
+    public List<Integer> getGroupMemberByGroupId(int grop_id) {
         return groupStructureMapper.selectMember(grop_id);
     }
 

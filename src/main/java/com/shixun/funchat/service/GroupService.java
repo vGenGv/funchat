@@ -7,7 +7,10 @@ import java.util.List;
 public interface GroupService {
     //查找群
     List<ChatGroup> search(ChatGroup group);
-    public List<Integer> getGroupMember(int grop_id);
+
+    public List<ChatGroup> getChatGroupByUserId(int userId);
+
+    public List<Integer> getGroupMemberByGroupId(int grop_id);
 
     public boolean createChatGroup(int id, String grop_name, String grop_type);
 

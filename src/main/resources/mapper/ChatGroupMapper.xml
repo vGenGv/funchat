@@ -10,6 +10,16 @@
   <sql id="Base_Column_List">
     grop_id, grop_name, sum, grop_type
   </sql>
+
+  <!-- 获取某个用户ID加入的所有群聊实体 -->
+  <select id="selectChatGroupByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from grop g, grop_structure s
+    where g.grop_id = s.grop_id
+    and s.id=#{userId,,jdbcType=INTEGER}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
