@@ -75,7 +75,24 @@
         </javaClientGenerator>
 
         <!--配置表映射文件:tableName数据库表的名称；生成的class的名称：domainObjectName-->
-        <table tableName="grop" domainObjectName="Group"
+        <!-- 用户表 -->
+        <!--
+        <table tableName="fun_user" domainObjectName="User"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        -->
+        <!-- 群表 -->
+        <!--
+        <table tableName="grop" domainObjectName="ChatGroup"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        -->
+        <!-- 群结构表 -->
+        <table tableName="grop_structure" domainObjectName="GroupStructure"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
