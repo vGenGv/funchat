@@ -2,6 +2,7 @@ package com.shixun.funchat.service.impl;
 
 import com.shixun.funchat.dao.GroupMapper;
 import com.shixun.funchat.entity.Group;
+import com.shixun.funchat.dao.GroupStructureMapper;
 import com.shixun.funchat.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,38 @@ public class GroupServiceImpl implements GroupService {
     @Autowired
     private GroupMapper groupMapper;
 
+    @Autowired
+    private GroupStructureMapper groupStructureMapper;
+
     //查找群
     @Override
     public List<Group> search(Group group) {
         List<Group> groups= groupMapper.selectByIdOrName(group);
         return groups;
+    }
+
+    @Override
+    public List<Integer> getGroupMember(int grop_id) {
+        return groupStructureMapper.selectMember(grop_id);
+    }
+
+    @Override
+    public boolean createChatGroup(int user_id, String grop_name, String grop_type) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteChatGroup(int user_id, int grop_id) {
+        return false;
+    }
+
+    @Override
+    public boolean joinChatGroup(int user_id, int grop_id) {
+        return false;
+    }
+
+    @Override
+    public boolean leaveChatGroup(int user_id, int grop_id) {
+        return false;
     }
 }

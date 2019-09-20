@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     name: funchat
-    url: jdbc:mysql://localhost:3306/funchat
+    url: jdbc:mysql://localhost:3306/funchat?serverTimezone=GMT
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver

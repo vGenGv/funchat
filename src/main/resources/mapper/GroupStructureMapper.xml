@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shixun.funchat.dao.GroupStructureMapper">
+  <resultMap id="BaseResultMap" type="com.shixun.funchat.entity.GroupStructure">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="grop_id" jdbcType="INTEGER" property="gropId" />
+    <result column="grop_job" jdbcType="VARCHAR" property="gropJob" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, grop_id, grop_job
+  </sql>
+  <select id="selectMember" resultType="java.lang.Integer">
+    select id from grop_structure
+    where grop_id = #{gropId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.shixun.funchat.entity.GroupStructureKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from grop_structure
+    where id = #{id,jdbcType=INTEGER}
+      and grop_id = #{gropId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.shixun.funchat.entity.GroupStructureKey">
+    delete from grop_structure
+    where id = #{id,jdbcType=INTEGER}
+      and grop_id = #{gropId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.shixun.funchat.entity.GroupStructure">
+    insert into grop_structure (id, grop_id, grop_job
+      )
+    values (#{id,jdbcType=INTEGER}, #{gropId,jdbcType=INTEGER}, #{gropJob,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shixun.funchat.entity.GroupStructure">
+    insert into grop_structure
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gropId != null">
+        grop_id,
+      </if>
+      <if test="gropJob != null">
+        grop_job,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gropId != null">
+        #{gropId,jdbcType=INTEGER},
+      </if>
+      <if test="gropJob != null">
+        #{gropJob,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shixun.funchat.entity.GroupStructure">
+    update grop_structure
+    <set>
+      <if test="gropJob != null">
+        grop_job = #{gropJob,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and grop_id = #{gropId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shixun.funchat.entity.GroupStructure">
+    update grop_structure
+    set grop_job = #{gropJob,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+      and grop_id = #{gropId,jdbcType=INTEGER}
+  </update>
+</mapper>
