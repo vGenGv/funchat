@@ -1,6 +1,6 @@
 package com.shixun.funchat.entity;
 
-public class Group {
+public class ChatGroup {
     private Integer gropId;
 
     private String gropName;

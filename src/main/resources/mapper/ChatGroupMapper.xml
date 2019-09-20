@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shixun.funchat.dao.GroupMapper">
-  <resultMap id="BaseResultMap" type="com.shixun.funchat.entity.Group">
+<mapper namespace="com.shixun.funchat.dao.ChatGroupMapper">
+  <resultMap id="BaseResultMap" type="com.shixun.funchat.entity.ChatGroup">
     <id column="grop_id" jdbcType="INTEGER" property="gropId" />
     <result column="grop_name" jdbcType="VARCHAR" property="gropName" />
     <result column="sum" jdbcType="INTEGER" property="sum" />
@@ -18,7 +18,7 @@
   </select>
 
   <!--  根据群名和id进行查找-->
-  <select id="selectByIdOrName" parameterType="com.shixun.funchat.entity.Group" resultMap="BaseResultMap">
+  <select id="selectByIdOrName" parameterType="com.shixun.funchat.entity.ChatGroup" resultMap="BaseResultMap">
     select grop_id,grop_name
     from grop
     <where>
@@ -35,13 +35,13 @@
     delete from grop
     where grop_id = #{gropId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.shixun.funchat.entity.Group">
+  <insert id="insert" parameterType="com.shixun.funchat.entity.ChatGroup">
     insert into grop (grop_id, grop_name, sum, 
       grop_type)
     values (#{gropId,jdbcType=INTEGER}, #{gropName,jdbcType=VARCHAR}, #{sum,jdbcType=INTEGER}, 
       #{gropType,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.shixun.funchat.entity.Group">
+  <insert id="insertSelective" parameterType="com.shixun.funchat.entity.ChatGroup">
     insert into grop
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="gropId != null">
@@ -72,7 +72,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shixun.funchat.entity.Group">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shixun.funchat.entity.ChatGroup">
     update grop
     <set>
       <if test="gropName != null">
@@ -87,7 +87,7 @@
     </set>
     where grop_id = #{gropId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shixun.funchat.entity.Group">
+  <update id="updateByPrimaryKey" parameterType="com.shixun.funchat.entity.ChatGroup">
     update grop
     set grop_name = #{gropName,jdbcType=VARCHAR},
       sum = #{sum,jdbcType=INTEGER},
