@@ -22,12 +22,14 @@ public class FriendServiceImpl implements FriendService {
     @Autowired
     private FriendMapper friendMapper;
 
+    //好友列表
     @Override
     public List<User> listfriend(int id) {
         List<User> users=friendMapper.selectByFriendId(id);
         return users;
     }
 
+    //删除好友
     @Override
     public String deleteFriend(Integer[] ids, HttpSession session) {
         int num=0;
@@ -45,10 +47,28 @@ public class FriendServiceImpl implements FriendService {
                 }
                 else  log.debug("id为" + id + "的好友,删除失败！");
             }
-            return "删除了"+num+"位好友！";
+            return "成功删除了"+num+"位好友！";
         }else{
             log.debug("ids=null");
             return "选择为空！";
         }
     }
+
+    //添加好友
+    @Override
+    public String addFriend(Integer id, HttpSession session) {
+        User user = (User) session.getAttribute("USER_SESSION");
+        Friend friend = new Friend();
+        friend.setFriendaId(user.getId());
+        friend.setFriendbId(id);
+        Friend friend1 = friendMapper.selectByPrimaryKey(friend);
+        if (friend1 == null) {
+            int state = friendMapper.insert(friend);
+            if (state != 0) {
+                return "添加好友成功！";
+            } else return "添加好友失败 ！";
+        }
+        else return "该用户已经是你的好友";
+    }
+
 }

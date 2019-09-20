@@ -26,6 +26,12 @@
     or f.friendB_id = #{id,jdbcType=INTEGER} and f.friendA_id = u.id
   </select>
 
+  <select id="selectByPrimaryKey" parameterType="com.shixun.funchat.entity.Friend" resultMap="BaseResultMap">
+    select *
+    from friend
+    where friendA_id = #{friendaId,jdbcType=INTEGER} and friendB_id = #{friendbId,jdbcType=INTEGER}
+    or friendA_id = #{friendbId,jdbcType=INTEGER} and friendB_id = #{friendaId,jdbcType=INTEGER}
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="com.shixun.funchat.entity.Friend">
     delete from friend

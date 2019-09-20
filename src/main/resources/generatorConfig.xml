@@ -75,7 +75,7 @@
         </javaClientGenerator>
 
         <!--配置表映射文件:tableName数据库表的名称；生成的class的名称：domainObjectName-->
-        <table tableName="fun_user" domainObjectName="User"
+        <table tableName="grop" domainObjectName="Group"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

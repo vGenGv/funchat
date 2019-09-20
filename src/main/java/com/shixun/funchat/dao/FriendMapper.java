@@ -16,4 +16,6 @@ public interface FriendMapper {
 
     List<User> selectByFriendId(int id);
 
+    Friend selectByPrimaryKey(Friend friend);
+
 }

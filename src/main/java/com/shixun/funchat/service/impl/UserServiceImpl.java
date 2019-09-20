@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -68,4 +69,10 @@ public class UserServiceImpl implements UserService {
         return map;
     }
 
+    //查找用户
+    @Override
+    public List<User> search(User user) {
+        List<User> users= userMapper.selectByIdOrName(user);
+        return users;
+    }
 }

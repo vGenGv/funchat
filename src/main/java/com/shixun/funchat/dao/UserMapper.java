@@ -3,6 +3,8 @@ package com.shixun.funchat.dao;
 import com.shixun.funchat.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -18,4 +20,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User selectByName(User user);
+
+    List<User> selectByIdOrName(User user);
 }

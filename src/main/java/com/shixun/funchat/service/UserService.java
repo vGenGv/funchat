@@ -3,6 +3,7 @@ package com.shixun.funchat.service;
 import com.shixun.funchat.entity.User;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 public interface UserService {
@@ -18,4 +19,7 @@ public interface UserService {
 
     //修改个人资料
     Map<String, String> edituser(User user, HttpSession session);
+
+    //查找用户
+    List<User> search(User user);
 }
