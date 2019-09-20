@@ -75,6 +75,7 @@
         </javaClientGenerator>
 
         <!--配置表映射文件:tableName数据库表的名称；生成的class的名称：domainObjectName-->
+<!--        <table tableName="grop" domainObjectName="Group"-->
         <!-- 用户表 -->
         <!--
         <table tableName="fun_user" domainObjectName="User"
