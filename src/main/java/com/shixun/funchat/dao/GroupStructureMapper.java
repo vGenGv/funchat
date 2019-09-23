@@ -8,8 +8,7 @@ import java.util.List;
 
 @Repository
 public interface GroupStructureMapper {
-
-    List<Integer> selectMember(int gropId);
+    int deleteSelective(GroupStructure record);
 
     int deleteByPrimaryKey(GroupStructureKey key);
 

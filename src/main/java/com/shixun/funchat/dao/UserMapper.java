@@ -22,4 +22,12 @@ public interface UserMapper {
     User selectByName(User user);
 
     List<User> selectByIdOrName(User user);
+
+    /**
+     * 查找群聊内所有成员
+     *
+     * @param grop_id 群聊ID
+     * @return 成员数组
+     */
+    List<User> selectUserByGroupId(Integer grop_id);
 }

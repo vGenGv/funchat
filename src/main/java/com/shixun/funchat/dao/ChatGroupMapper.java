@@ -8,12 +8,20 @@ import java.util.List;
 @Repository
 public interface ChatGroupMapper {
     /**
-     * 获取某个用户ID加入的所有群聊实体
+     * 查找当前用户所加入的所有群聊信息
      *
-     * @param userId 用户ID
-     * @return 群聊实体数组
+     * @param id 用户ID
+     * @return 查找结果
      */
-    List<ChatGroup> selectChatGroupByUserId(Integer userId);
+    List<ChatGroup> selectChatGroupsByUserId(Integer id);
+
+    /**
+     * 查找某个群聊
+     *
+     * @param grop_name 群聊名称
+     * @return 查找结果
+     */
+    List<ChatGroup> selectChatGroupByGroupName(String grop_name);
 
     int deleteByPrimaryKey(Integer gropId);
 

@@ -3,6 +3,7 @@ package com.shixun.funchat.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.shixun.funchat.entity.User;
 import com.shixun.funchat.service.GroupService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -58,15 +59,15 @@ public class WebSocketController implements WebSocketHandler {
                 return;
             }
             //获取组内成员 ID
-            List<Integer> group_users = groupService.getGroupMemberByGroupId(toGroupID);
+            List<User> group_users = groupService.displayChatGroupMember(toGroupID);
             if (group_users.size() == 0) {
                 log.debug("群聊不存在");
                 return;
             }
             //群发在线消息
-            for (Integer group_user : group_users) {
+            for (User group_user : group_users) {
                 //获取在线用户会话
-                WebSocketSession toSession = websocketList.get(String.valueOf(group_user));
+                WebSocketSession toSession = websocketList.get(String.valueOf(group_user.getId()));
                 if (toSession != null) {
                     json_msg.put("fromUserID", getUserID(session));
                     toSession.sendMessage(new TextMessage(JSON.toJSONString(json_msg)));

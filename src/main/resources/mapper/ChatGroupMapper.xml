@@ -11,20 +11,20 @@
     grop_id, grop_name, sum, grop_type
   </sql>
 
-  <!-- 获取某个用户ID加入的所有群聊实体 -->
-  <select id="selectChatGroupByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
+  <!-- 根据id关联查找grop_structure表和grop表 -->
+  <select id="selectChatGroupsByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select g.*
     from grop g, grop_structure s
     where g.grop_id = s.grop_id
-    and s.id=#{userId,,jdbcType=INTEGER}
+    and s.id=#{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+  <!-- 根据grop_name模糊查找grop表 -->
+  <select id="selectChatGroupByGroupName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
     from grop
-    where grop_id = #{gropId,jdbcType=INTEGER}
+    where grop_name like concat(#{gropId,jdbcType=VARCHAR},'%')
   </select>
 
   <!--  根据群名和id进行查找-->
@@ -41,16 +41,27 @@
     </where>
   </select>
 
+  <!-- 自动生成 -->
+  <!-- 查找 -->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from grop
+    where grop_id = #{gropId,jdbcType=INTEGER}
+  </select>
+  <!-- 删除 -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from grop
     where grop_id = #{gropId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.shixun.funchat.entity.ChatGroup">
+  <!-- 插入 -->
+  <insert id="insert" parameterType="com.shixun.funchat.entity.ChatGroup" useGeneratedKeys="true" keyProperty="gropId">
     insert into grop (grop_id, grop_name, sum, 
       grop_type)
     values (#{gropId,jdbcType=INTEGER}, #{gropName,jdbcType=VARCHAR}, #{sum,jdbcType=INTEGER}, 
       #{gropType,jdbcType=VARCHAR})
   </insert>
+  <!-- 选择性插入-->
   <insert id="insertSelective" parameterType="com.shixun.funchat.entity.ChatGroup">
     insert into grop
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -82,6 +93,7 @@
       </if>
     </trim>
   </insert>
+  <!-- 选择性更新-->
   <update id="updateByPrimaryKeySelective" parameterType="com.shixun.funchat.entity.ChatGroup">
     update grop
     <set>
@@ -97,6 +109,7 @@
     </set>
     where grop_id = #{gropId,jdbcType=INTEGER}
   </update>
+  <!-- 更新-->
   <update id="updateByPrimaryKey" parameterType="com.shixun.funchat.entity.ChatGroup">
     update grop
     set grop_name = #{gropName,jdbcType=VARCHAR},

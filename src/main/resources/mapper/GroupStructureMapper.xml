@@ -9,10 +9,9 @@
   <sql id="Base_Column_List">
     id, grop_id, grop_job
   </sql>
-  <select id="selectMember" resultType="java.lang.Integer">
-    select id from grop_structure
-    where grop_id = #{gropId,jdbcType=INTEGER}
-  </select>
+
+  <!-- 自动生成 -->
+  <!-- 查找 -->
   <select id="selectByPrimaryKey" parameterType="com.shixun.funchat.entity.GroupStructureKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -20,17 +19,36 @@
     where id = #{id,jdbcType=INTEGER}
       and grop_id = #{gropId,jdbcType=INTEGER}
   </select>
+  <!-- 删除 -->
   <delete id="deleteByPrimaryKey" parameterType="com.shixun.funchat.entity.GroupStructureKey">
     delete from grop_structure
     where id = #{id,jdbcType=INTEGER}
       and grop_id = #{gropId,jdbcType=INTEGER}
   </delete>
+  <!-- 批量删除 -->
+  <delete id="deleteSelective" parameterType="com.shixun.funchat.entity.GroupStructure">
+    delete from grop_structure
+    where
+    <trim suffixOverrides="and">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER} and
+      </if>
+      <if test="gropId != null">
+        grop_id = #{gropId,jdbcType=INTEGER} and
+      </if>
+      <if test="gropJob != null">
+        grop_job = #{gropJob,jdbcType=INTEGER} and
+      </if>
+    </trim>
+  </delete>
+  <!-- 插入 -->
   <insert id="insert" parameterType="com.shixun.funchat.entity.GroupStructure">
     insert into grop_structure (id, grop_id, grop_job
       )
     values (#{id,jdbcType=INTEGER}, #{gropId,jdbcType=INTEGER}, #{gropJob,jdbcType=VARCHAR}
       )
   </insert>
+  <!-- 选择性插入 -->
   <insert id="insertSelective" parameterType="com.shixun.funchat.entity.GroupStructure">
     insert into grop_structure
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -56,6 +74,7 @@
       </if>
     </trim>
   </insert>
+  <!-- 选择性更新 -->
   <update id="updateByPrimaryKeySelective" parameterType="com.shixun.funchat.entity.GroupStructure">
     update grop_structure
     <set>
@@ -66,6 +85,7 @@
     where id = #{id,jdbcType=INTEGER}
       and grop_id = #{gropId,jdbcType=INTEGER}
   </update>
+  <!-- 更新 -->
   <update id="updateByPrimaryKey" parameterType="com.shixun.funchat.entity.GroupStructure">
     update grop_structure
     set grop_job = #{gropJob,jdbcType=VARCHAR}
