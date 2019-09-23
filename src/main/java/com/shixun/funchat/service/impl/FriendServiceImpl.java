@@ -39,7 +39,6 @@ public class FriendServiceImpl implements FriendService {
                 Friend friend = new Friend();
                 friend.setFriendaId(id);
                 friend.setFriendbId(user.getId());
-                // 使用输出语句模拟已经删除了用户
                 int state=friendMapper.deleteByPrimaryKey(friend);
                 if (state !=0) {
                     num+=1;
