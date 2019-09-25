@@ -194,9 +194,7 @@ public class GroupServiceImpl implements GroupService {
         groupStructureKey.setGropId(groupId);
         groupStructureKey.setId(userId);
         GroupStructure groupStructure = groupStructureMapper.selectByPrimaryKey(groupStructureKey);
-        if (groupStructure == null)
-            return false;
-        return true;
+        return groupStructure != null;
     }
 
     /**
@@ -234,7 +232,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     @Transactional
     public boolean removeFromChatGroupByOwner(Integer ownerId, Integer removeId, Integer groupId) {
-        if(ownerId==removeId)
+        if(ownerId.equals(removeId))
             return false;
         ChatGroup chatGroup = chatGroupMapper.selectByPrimaryKey(groupId);
         if (chatGroup == null) //群聊不存在
