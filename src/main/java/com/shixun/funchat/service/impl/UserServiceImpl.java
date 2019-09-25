@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         System.out.println(user.getUsername());//测试后台接收数据
         Map<String, String> map = new HashMap<>();
         User user1=userMapper.CheckByName(user.getUsername());
-        if (user1!=null){
+        while (user1!=null){
             map.put("msg","用户名已被使用，注册失败！");
             return map;
         }
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
     public Map<String, String> edituser(User user, HttpSession session) {
         Map<String, String> map = new HashMap<>();
         User user1=userMapper.CheckByName(user.getUsername());
-        if (user1!=null){
+        while (user1!=null){
             map.put("msg","用户名已被使用，修改失败！");
             return map;
         }

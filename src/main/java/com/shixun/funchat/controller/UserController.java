@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -53,7 +54,11 @@ public class UserController {
     @PostMapping("/register")
     @ResponseBody
     public Map<String, String> register(@RequestBody User user, HttpSession session){
-        Map<String, String> map;
+        Map<String, String> map = new HashMap<>();
+        while (user.getUsername().equals("") || user.getPassword().equals("")) {
+            map.put("msg","用户名或密码不能为空，注册失败");
+            return map;
+        }
         map = userService.register(user,session);
         return map;
     }
