@@ -55,15 +55,17 @@ public class FriendController {
 
     //实现好友搜索和群搜索
     @PostMapping("/search")
-    public String Search(User user,Model model){
-        ChatGroup group = new ChatGroup();
-        group.setGropId(user.getId());
-        group.setGropName(user.getUsername());
+    @ResponseBody
+    public List<User> Search(User user,Model model){
+//        ChatGroup group = new ChatGroup();
+//        group.setGropId(user.getId());
+//        group.setGropName(user.getUsername());
         List<User> users = userService.search(user);
-        List<ChatGroup> groups =groupService.search(group);
-        model.addAttribute("users",users);
-        model.addAttribute("groups",groups);
-        return "test_search";
+//        List<ChatGroup> groups =groupService.search(group);
+//        model.addAttribute("users",users);
+//        model.addAttribute("groups",groups);
+//        return "test_search";
+        return users;
     }
 
     //添加好友
