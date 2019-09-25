@@ -77,10 +77,12 @@ public class UserController {
     //修改个人资料
     @PostMapping("/edituser")
     @ResponseBody
-    public  Map<String, String> edituser(@RequestBody User user, HttpSession session){
+    public  Map<String, String> edituser(@RequestBody User user,HttpServletRequest request){
+        HttpSession session=request.getSession();
+        User user2 = (User) session.getAttribute("USER_SESSION");//从session中直接获得
         Map<String, String> map;
         log.debug("修改用户id: "+user.getId());
-        map = userService.edituser(user,session);
+        map = userService.edituser(user,user2.getUsername(),session);
         return map;
     }
 

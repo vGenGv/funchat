@@ -63,17 +63,17 @@ public class UserServiceImpl implements UserService {
 
     //修改个人资料
     @Override
-    public Map<String, String> edituser(User user, HttpSession session) {
+    public Map<String, String> edituser(User user,String username, HttpSession session) {
         Map<String, String> map = new HashMap<>();
         User user1=userMapper.CheckByName(user.getUsername());
-        while (user1!=null){
+        while (user1!=null&& !username.equals(user.getUsername())){
             map.put("msg","用户名已被使用，修改失败！");
             return map;
         }
         int state = userMapper.updateByPrimaryKeySelective(user);
         if (state !=0){
             map.put("msg","修改成功");
-            session.setAttribute("USER_SESSION", user);//注册成功，加入session
+            session.setAttribute("USER_SESSION", user);//修改成功，加入session
         }
         else map.put("msg","修改失败");
         return map;
