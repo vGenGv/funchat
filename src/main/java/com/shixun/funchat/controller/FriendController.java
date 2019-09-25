@@ -37,14 +37,24 @@ public class FriendController {
         User user = (User) session.getAttribute("USER_SESSION");
         List<User> users=friendService.listfriend(user.getId());
         model.addAttribute("users",users);
-        return "test_listfriend";
+//        return "test_listfriend";
+        return "index_qiaofeng";
+    }
+
+    //批量删除好友
+    @PostMapping("/deleteFriendSelective")
+    public String deleteFriendSelective(Integer[] ids, HttpServletRequest request) {
+        HttpSession session=request.getSession();
+        String msg = friendService.deleteFriendSelective(ids,session);
+        log.debug(msg);
+        return "redirect:/listfriend";
     }
 
     //删除好友
-    @PostMapping("/deleteFriend")
-    public String deleteFriend(Integer[] ids, HttpServletRequest request) {
+    @GetMapping("/deleteFriend")
+    public String deleteFriend(String username, HttpServletRequest request) {
         HttpSession session=request.getSession();
-        String msg = friendService.deleteFriend(ids,session);
+        String msg = friendService.deleteFriend(username,session);
         log.debug(msg);
         return "redirect:/listfriend";
     }

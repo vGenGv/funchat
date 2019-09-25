@@ -15,7 +15,7 @@ function new_login(){
         success: function (map) {
             if (map != null) {
                 alert(map.msg);
-                window.location.href="/index"
+                window.location.href="/index";
             }
         }
     });

@@ -46,9 +46,9 @@ public class UserController {
         return "redirect:/login";
     }
 
-    //跳转注册页面
-    @GetMapping("/register")
-    public String toregister(){return "test_register";}
+//    //跳转注册页面
+//    @GetMapping("/register")
+//    public String toregister(){return "test_register";}
 
     // 注册，上传数据库
     @PostMapping("/register")
