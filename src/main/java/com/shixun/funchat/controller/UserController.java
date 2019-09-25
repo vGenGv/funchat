@@ -27,7 +27,7 @@ public class UserController {
 //    跳转登录页面
     @GetMapping("/login")
     public String tologin(){
-        return "test_login";}
+        return "new_login";}
 
 //    根据用户名和密码登录
     @PostMapping("/login")
