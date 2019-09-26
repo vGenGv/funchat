@@ -2,6 +2,7 @@ package com.shixun.funchat.controller;
 
 import com.shixun.funchat.entity.User;
 import com.shixun.funchat.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class UserController {
     @ResponseBody
     public Map<String, String> register(@RequestBody User user, HttpSession session){
         Map<String, String> map = new HashMap<>();
-        while (user.getUsername().equals("") || user.getPassword().equals("")) {
+        if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())) {
             map.put("msg","用户名或密码不能为空，注册失败");
             return map;
         }
