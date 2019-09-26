@@ -13,4 +13,9 @@ public class IndexController {
         retVal.addObject("message", "Hello, funchat!");
         return retVal;
     }
+
+    @RequestMapping(value = "/index_qiaofeng")
+    public String index_qiaofeng() {
+        return "index_qiaofeng";
+    }
 }

@@ -8,24 +8,31 @@
     <title>Soho - Chat and Discussion Platform</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="./dist/media/img/favicon.png" type="image/png">
+    <link rel="icon" href="./media/img/favicon.png" type="image/png">
 
     <!-- Soho css -->
-    <link rel="stylesheet" href="./dist/css/soho.min.css">
-    <script type="text/javascript">
-        $(function(){
-            setInterval("getTime();",1000); //每隔一秒运行一次
-        })
-        //取得系统当前时间
-        function getTime(){
-            var myDate = new Date();
-            var date = myDate.toLocaleDateString();
-            var hours = myDate.getHours();
-            var minutes = myDate.getMinutes();
-            var seconds = myDate.getSeconds();
-            $("#showDate").html(date+" "+hours+":"+minutes+":"+seconds); //将值赋给div
-        }
-    </script>
+    <link rel="stylesheet" href="./css/soho.min.css">
+
+
+<!--    <script type="text/javascript">-->
+<!--        window.onload=function() {-->
+<!--            //取得系统当前时间-->
+<!--            function getTime() {-->
+<!--                var myDate = new Date();-->
+<!--                var date = myDate.toLocaleDateString();-->
+<!--                var hours = myDate.getHours();-->
+<!--                var minutes = myDate.getMinutes();-->
+<!--                var seconds = myDate.getSeconds();-->
+<!--                $("#showDate").html(date + " " + hours + ":" + minutes + ":" + seconds); //将值赋给div-->
+<!--            }-->
+
+<!--            $(function () {-->
+<!--                setInterval("getTime();", 1000); //每隔一秒运行一次-->
+<!--            })-->
+
+<!--        }-->
+<!--    </script>-->
+
 </head>
 <body>
 
@@ -77,10 +84,10 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="call">
-                    <div class="call-background" style="background: url(./dist/media/img/call-bg.png)"></div>
+                    <div class="call-background" style="background: url(../static/media/img/call-bg.png)"></div>
                     <div>
                         <figure class="mb-4 avatar avatar-xl">
-                            <img src="./dist/media/img/women_avatar1.jpg" class="rounded-circle">
+                            <img src="./media/img/women_avatar1.jpg" class="rounded-circle">
                         </figure>
                         <h4 class="text-center">Jennica Kindred calling ...</h4>
                         <div class="action-button">
@@ -163,13 +170,13 @@
                                 <span class="avatar-title bg-success rounded-circle">E</span>
                             </figure>
                             <figure class="avatar">
-                                <img src="./dist/media/img/women_avatar1.jpg" class="rounded-circle">
+                                <img src="./media/img/women_avatar1.jpg" class="rounded-circle">
                             </figure>
                             <figure class="avatar">
                                 <span class="avatar-title bg-danger rounded-circle">S</span>
                             </figure>
                             <figure class="avatar">
-                                <img src="./dist/media/img/man_avatar2.jpg" class="rounded-circle">
+                                <img src="./media/img/man_avatar2.jpg" class="rounded-circle">
                             </figure>
                             <figure class="avatar">
                                 <span class="avatar-title bg-info rounded-circle">C</span>
@@ -336,7 +343,7 @@
                                 <div class="d-flex align-items-center">
                                     <div>
                                         <figure class="avatar mr-3 item-rtl">
-                                            <img src="./dist/media/img/man_avatar3.jpg" class="rounded-circle">
+                                            <img src="./media/img/man_avatar3.jpg" class="rounded-circle">
                                         </figure>
                                     </div>
                                     <div class="custom-file">
@@ -578,13 +585,13 @@
                     </ul>
                 </header>
                 <form action="">
-                    <input type="text" class="form-control" placeholder="Search chat">
+                    <input id="search_Group" type="text" class="form-control" placeholder="Search chat">
                 </form>
                 <div class="sidebar-body">
-                    <ul class="list-group list-group-flush">
+                    <ul  id="list_chat_group" class="list-group list-group-flush">
                         <li class="list-group-item">
                             <figure class="avatar avatar-state-success">
-                                <img src="./dist/media/img/man_avatar1.jpg" class="rounded-circle">
+                                <img src="./media/img/man_avatar1.jpg" class="rounded-circle">
                             </figure>
                             <div class="users-list-body">
                                 <h5>Patsy Paulton</h5>
@@ -597,7 +604,7 @@
                         <li class="list-group-item open-chat">
                             <div>
                                 <figure class="avatar">
-                                    <img src="./dist/media/img/man_avatar3.jpg" class="rounded-circle">
+                                    <img src="./media/img/man_avatar3.jpg" class="rounded-circle">
                                 </figure>
                             </div>
                             <div class="users-list-body">
@@ -612,7 +619,7 @@
                                             <a href="#" class="dropdown-item">Open</a>
                                             <a href="#" data-navigation-target="contact-information" class="dropdown-item">Profile</a>
                                             <a href="#" class="dropdown-item">Add to archive</a>
-                                            <a href="#" class="dropdown-item">Delete</a>
+                                            <a href="#" class="dropdown-item" >Delete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -647,7 +654,7 @@
                         <li class="list-group-item">
                             <div>
                                 <figure class="avatar avatar-state-warning">
-                                    <img src="./dist/media/img/women_avatar1.jpg" class="rounded-circle">
+                                    <img src="./media/img/women_avatar1.jpg" class="rounded-circle">
                                 </figure>
                             </div>
                             <div class="users-list-body">
@@ -695,7 +702,7 @@
                         <li class="list-group-item">
                             <div>
                                 <figure class="avatar">
-                                    <img src="./dist/media/img/man_avatar2.jpg" class="rounded-circle">
+                                    <img src="./media/img/man_avatar2.jpg" class="rounded-circle">
                                 </figure>
                             </div>
                             <div class="users-list-body">
@@ -746,7 +753,7 @@
                         <li class="list-group-item">
                             <div>
                                 <figure class="avatar">
-                                    <img src="./dist/media/img/women_avatar5.jpg" class="rounded-circle">
+                                    <img src="./media/img/women_avatar5.jpg" class="rounded-circle">
                                 </figure>
                             </div>
                             <div class="users-list-body">
@@ -794,7 +801,7 @@
                         <li class="list-group-item">
                             <div>
                                 <figure class="avatar">
-                                    <img src="./dist/media/img/women_avatar1.jpg" class="rounded-circle">
+                                    <img src="./media/img/women_avatar1.jpg" class="rounded-circle">
                                 </figure>
                             </div>
                             <div class="users-list-body">
@@ -818,7 +825,7 @@
                         <li class="list-group-item">
                             <div>
                                 <figure class="avatar">
-                                    <img src="./dist/media/img/man_avatar3.jpg" class="rounded-circle">
+                                    <img src="./media/img/man_avatar3.jpg" class="rounded-circle">
                                 </figure>
                             </div>
                             <div class="users-list-body">
@@ -842,7 +849,7 @@
                         <li class="list-group-item">
                             <div>
                                 <figure class="avatar">
-                                    <img src="./dist/media/img/man_avatar2.jpg" class="rounded-circle">
+                                    <img src="./media/img/man_avatar2.jpg" class="rounded-circle">
                                 </figure>
                             </div>
                             <div class="users-list-body">
@@ -914,7 +921,7 @@
                         <li class="list-group-item">
                             <div>
                                 <figure class="avatar">
-                                    <img src="./dist/media/img/man_avatar1.jpg" class="rounded-circle">
+                                    <img src="./media/img/man_avatar1.jpg" class="rounded-circle">
                                 </figure>
                             </div>
                             <div class="users-list-body">
@@ -938,7 +945,7 @@
                         <li class="list-group-item">
                             <div>
                                 <figure class="avatar">
-                                    <img src="./dist/media/img/man_avatar5.jpg" class="rounded-circle">
+                                    <img src="./media/img/man_avatar5.jpg" class="rounded-circle">
                                 </figure>
                             </div>
                             <div class="users-list-body">
@@ -1090,7 +1097,7 @@
             <div class="chat-header">
                 <div class="chat-header-user">
                     <figure class="avatar avatar-lg">
-                        <img src="./dist/media/img/man_avatar3.jpg" class="rounded-circle">
+                        <img src="./media/img/man_avatar3.jpg" class="rounded-circle">
                     </figure>
                     <div>
                         <h5>Karl Hubane</h5>
@@ -1118,7 +1125,7 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a href="#" data-navigation-target="contact-information" class="dropdown-item">Profile</a>
                                 <a href="#" class="dropdown-item">Add to archive</a>
-                                <a href="#" class="dropdown-item">Delete</a>
+                                <a id="leave_Group" href="#" class="dropdown-item">leaveGroup</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="#" class="dropdown-item">Block</a>
                             </div>
@@ -1163,7 +1170,7 @@
                             I'm sending files now.
                         </div>
                         <div class="message-action">
-                            <div id="showDate"></div>
+                            <div id="show_Date1"></div>
                         </div>
                     </div>
                     <div class="message-item">
@@ -1180,7 +1187,7 @@
                             </div>
                         </div>
                         <div class="message-action">
-                            <div id="showDate"></div>
+                            <div id="show_Date2"></div>
                         </div>
                     </div>
                     <div class="message-item outgoing-message">
@@ -1214,10 +1221,96 @@
                     <input id="message_content" type="text" class="form-control" placeholder="Recipient's username"
                            aria-label="Recipient's username" aria-describedby="button-addon2">
                     <div class="form-buttons">
-                        <button class="btn btn-light btn-floating">
+                        <!--测试显示群组功能-->
+<!--                        <script>
+                            function displayGroup(){
+
+
+                                DisplayChatosGroup = {
+                                    groupList:{
+                                        showGroup:function (groupId, groupName) {
+
+                                            var chat_groupbody = $('.layout .content .list-group .list-group-item');
+                                            if (chat_groupbody.length > 0) {
+                                                //alert("测试用，执行中。。。");
+                                                //groupName = groupName? groupName:'';
+                                                var tabindex_num = 13;
+                                                $('.list-group ').append(
+                                                    '<li id="GroupId'+groupId+'" class="list-group-item " >\n'+ //+tabindex="'+tabindex_num+'" style="overflow: hidden; outline: none;"
+                                                    '<div>\n' +
+                                                    '<figure class="avatar">\n' + '<img src="./media/img/man_avatar3.jpg" class="rounded-circle">\n' + ' </figure>\n' + '</div>' + '<div class="users-list-body"><h5>' + groupName +'</h5>'+' <div class="users-list-action action-toggle">\n' +
+                                                    '<div class="dropdown">\n' +
+                                                    '<a data-toggle="dropdown" href="#">\n' +
+                                                    '<i class="ti-more"></i>\n' +
+                                                    '</a>\n' +
+                                                    '<div class="dropdown-menu dropdown-menu-right">\n' +
+                                                    '<a href="#" class="dropdown-item">Open</a>\n' +
+                                                    '<a href="#" data-navigation-target="contact-information" class="dropdown-item">Profile</a>\n' +
+                                                    '<a href="#" class="dropdown-item">Add to archive</a>\n' +
+                                                    '<a href="#" class="dropdown-item">Update</a>\n' +
+                                                    '<a href="#" class="dropdown-item">Delete</a>\n' +
+                                                    '</div>\n' +
+                                                    '</div>\n' +
+                                                    '</div>\n' +
+                                                    '</div>\n'+
+                                                    '</li>');
+                                                    tabindex_num++;
+
+                                                chat_groupbody.scrollTop(chat_groupbody.get(0).scrollHeight, -1).niceScroll({
+                                                    cursorcolor: 'rgba(66, 66, 66, 0.20)',
+                                                    cursorwidth: "4px",
+                                                    cursorborder: '0px'
+                                                });
+
+                                            }
+                                        }
+                                    }
+                                };
+
+                                //alert("测试用，通过！");
+
+                                $.ajax({
+                                    type:"post",
+                                    url: "/GroupControl",//提交到的url
+                                    dataType: "json",
+                                    //因为ajax默认是异步调用的，所以得到的返回值是空值，要得到值必须改成同步
+                                    //async: false,
+                                    //将JavaScript对象转换为JSON对象
+                                    data: JSON.stringify({func:"displayGroup"}),
+                                    // 定义发送请求的数据格式为JSON字符串
+                                    contentType: "application/json;charset=UTF-8",
+
+                                    success: function (json) {
+                                        var iii = '{"result":"success","error_info":"Default error!","return":[{"gropId":1001,"sum":10,"gropType":"1","gropName":"no1"},{"gropId":1002,"sum":10,"gropType":"1","gropName":"no2"}]}';
+                                        var ii = eval("("+iii+")");
+                                        alert(ii.return[0].groupName);
+
+                                        var json_str = JSON.stringify(json);
+                                        alert(json_str);
+                                        var data = eval("("+json_str+")");
+                                        alert(data.return[0].groupName);
+                                        if(data.result === "success"){
+                                            for(i = 0; i<data.return.length; i++){
+                                                DisplayChatosGroup.groupList.showGroup(data.return[i].groupId, data.return[i].groupName);//传入groupId和groupName并显示出来
+                                            }
+                                            alert("群组显示成功！");
+
+                                        }else if(data.result === "failed"){
+                                            //return false;
+                                            alert("显示群组信息失败！");
+                                        }else if(data.result === "error"){
+                                            alert(data.error_info);
+                                        }
+
+                                        //返回群聊信息数组
+                                    }
+                                });
+                            }
+                        </script>-->
+                        <button id="test_displayGroup" class="btn btn-light btn-floating" onclick="displayGroup()">
                             <i class="fa fa-paperclip"></i>
                         </button>
-                        <button class="btn btn-light btn-floating" type="button" onclick="getMessage()">
+                        <button class="btn btn-light btn-floating" type="button" >
                             <i class="fa fa-microphone"></i>
                         </button>
                         <!--按钮点击调用函数sendMessage()-->
@@ -1245,7 +1338,7 @@
                 <div class="sidebar-body">
                     <div class="pl-4 pr-4 text-center">
                         <figure class="avatar avatar-state-danger avatar-xl mb-4">
-                            <img src="./dist/media/img/women_avatar5.jpg" class="rounded-circle">
+                            <img src="./media/img/women_avatar5.jpg" class="rounded-circle">
                         </figure>
                         <h5 class="text-primary">Frans Hanscombe</h5>
                         <p class="text-muted">Last seen: Today</p>
@@ -1277,21 +1370,21 @@
                                 <li class="list-inline-item">
                                     <a href="#">
                                         <figure class="avatar avatar-lg">
-                                            <img src="./dist/media/img/women_avatar1.jpg">
+                                            <img src="./media/img/women_avatar1.jpg">
                                         </figure>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a href="#">
                                         <figure class="avatar avatar-lg">
-                                            <img src="./dist/media/img/women_avatar3.jpg">
+                                            <img src="./media/img/women_avatar3.jpg">
                                         </figure>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a href="#">
                                         <figure class="avatar avatar-lg">
-                                            <img src="./dist/media/img/women_avatar4.jpg">
+                                            <img src="./media/img/women_avatar4.jpg">
                                         </figure>
                                     </a>
                                 </li>
@@ -1406,23 +1499,26 @@
 <!-- ./ layout -->
 
 <!-- JQuery -->
-<script src="./vendor/jquery-3.4.1.min.js"></script>
+<script src="./js/jquery-3.4.1.min.js"></script>
 
 <!-- Popper.js -->
-<script src="./vendor/popper.min.js"></script>
+<script src="./js/popper.min.js"></script>
 
 <!-- Bootstrap -->
-<script src="./vendor/bootstrap/bootstrap.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
 
 <!-- Nicescroll -->
-<script src="./vendor/jquery.nicescroll.min.js"></script>
+<script src="./js/jquery.nicescroll.min.js"></script>
 
 <!-- Soho -->
-<script src="./dist/js/soho.min.js"></script>
+<script src="./js/soho.min.js"></script>
 
 <!-- Examples -->
-<script src="./dist/js/examples.js"></script>
+<script src="./js/examples.js"></script>
 
-<script src="./dist/js/ajax.js"></script>
+<!-- ajax.js-->
+<script src="./js/ajax.js"></script>
+
+
 </body>
 </html>

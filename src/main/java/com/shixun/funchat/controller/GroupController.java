@@ -58,7 +58,7 @@ public class GroupController {
 
     @PostMapping("/GroupControl")
     @ResponseBody
-    public Map<String, Object> testGroup(@RequestBody String jsonString, HttpSession session) {
+    public String testGroup(@RequestBody String jsonString, HttpSession session) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("result", "error");
         map.put("error_info", "Default error!");
@@ -84,7 +84,7 @@ public class GroupController {
                         map.put("return", chatGroups);
                         throw new MyException(MyExceptionType.Success);
                     } else
-                        throw new MyException(MyExceptionType.ParamError);
+                    throw new MyException(MyExceptionType.ParamError);
                 }
                 case "joinGroup": {
                     Integer groupId = jsonObject.getInteger("groupId");
@@ -202,6 +202,8 @@ public class GroupController {
             }
         }
 
-        return map;
+        JSONObject rs_json = (JSONObject) JSON.toJSON(map);
+        log.info("rs_json = " + rs_json.toJSONString());
+        return rs_json.toJSONString();
     }
 }

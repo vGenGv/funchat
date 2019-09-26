@@ -67,6 +67,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         url.add("/images/**");
         url.add("/img/**");
         url.add("/*.html");
+        //url.add("/index_qiaofeng");
+        url.add("/icons/**");//防止"/icons"资源被拦截
+        url.add("/media/**");//同上
+
         return url;
     }
 }

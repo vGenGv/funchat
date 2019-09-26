@@ -1,3 +1,5 @@
+var ChatosExamle;
+
 $(function () {
 
     /**
@@ -5,7 +7,9 @@ $(function () {
      *
      **/
 
-    var ChatosExamle = {
+
+
+    ChatosExamle = {
         Message: {
             add: function (message, type) {
                 var chat_body = $('.layout .content .chat .chat-body');
@@ -31,10 +35,7 @@ $(function () {
         ChatosExamle.Message.add();
     }, 1000);
 
-    setTimeout(function () {
-        // $('#disconnected').modal('show');
-        $('#call').modal('show');
-    }, 2000);
+
 
     $(document).on('submit', '.layout .content .chat .chat-footer form', function (e) {
         e.preventDefault();
@@ -45,7 +46,7 @@ $(function () {
         message = $.trim(message);
 
         if (message) {
-            ChatosExamle.Message.add(message, "outgoing-message");
+            ChatosExamle.Message.add(message, "outgoing-message"); //原来是outgoing-message,输入的文字显示在右侧
             input.val('');
         } else {
             input.focus();
