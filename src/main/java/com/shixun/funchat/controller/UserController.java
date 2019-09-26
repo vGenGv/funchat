@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -26,7 +27,7 @@ public class UserController {
 //    跳转登录页面
     @GetMapping("/login")
     public String tologin(){
-        return "test_login";}
+        return "new_login";}
 
 //    根据用户名和密码登录
     @PostMapping("/login")
@@ -45,15 +46,19 @@ public class UserController {
         return "redirect:/login";
     }
 
-    //跳转注册页面
-    @GetMapping("/register")
-    public String toregister(){return "test_register";}
+//    //跳转注册页面
+//    @GetMapping("/register")
+//    public String toregister(){return "test_register";}
 
     // 注册，上传数据库
     @PostMapping("/register")
     @ResponseBody
     public Map<String, String> register(@RequestBody User user, HttpSession session){
-        Map<String, String> map;
+        Map<String, String> map = new HashMap<>();
+        while (user.getUsername().equals("") || user.getPassword().equals("")) {
+            map.put("msg","用户名或密码不能为空，注册失败");
+            return map;
+        }
         map = userService.register(user,session);
         return map;
     }
@@ -72,10 +77,12 @@ public class UserController {
     //修改个人资料
     @PostMapping("/edituser")
     @ResponseBody
-    public  Map<String, String> edituser(@RequestBody User user, HttpSession session){
+    public  Map<String, String> edituser(@RequestBody User user,HttpServletRequest request){
+        HttpSession session=request.getSession();
+        User user2 = (User) session.getAttribute("USER_SESSION");//从session中直接获得
         Map<String, String> map;
         log.debug("修改用户id: "+user.getId());
-        map = userService.edituser(user,session);
+        map = userService.edituser(user,user2.getUsername(),session);
         return map;
     }
 

@@ -21,7 +21,9 @@ public interface UserMapper {
 
     User selectByName(User user);
 
-    List<User> selectByIdOrName(User user);
+    List<User> selectByMailOrName(User user);
+
+    User CheckByName(String string);
 
     /**
      * 查找群聊内所有成员

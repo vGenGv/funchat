@@ -37,14 +37,24 @@ public class FriendController {
         User user = (User) session.getAttribute("USER_SESSION");
         List<User> users=friendService.listfriend(user.getId());
         model.addAttribute("users",users);
-        return "test_listfriend";
+//        return "test_listfriend";
+        return "index_qiaofeng";
+    }
+
+    //批量删除好友
+    @PostMapping("/deleteFriendSelective")
+    public String deleteFriendSelective(Integer[] ids, HttpServletRequest request) {
+        HttpSession session=request.getSession();
+        String msg = friendService.deleteFriendSelective(ids,session);
+        log.debug(msg);
+        return "redirect:/listfriend";
     }
 
     //删除好友
-    @PostMapping("/deleteFriend")
-    public String deleteFriend(Integer[] ids, HttpServletRequest request) {
+    @GetMapping("/deleteFriend")
+    public String deleteFriend(String username, HttpServletRequest request) {
         HttpSession session=request.getSession();
-        String msg = friendService.deleteFriend(ids,session);
+        String msg = friendService.deleteFriend(username,session);
         log.debug(msg);
         return "redirect:/listfriend";
     }
@@ -53,17 +63,24 @@ public class FriendController {
     @GetMapping("/search")
     public String tosearch(){return "test_search";}
 
-    //实现好友搜索和群搜索
+    //实现添加好友搜索和群搜索
     @PostMapping("/search")
-    public String Search(User user,Model model){
-        ChatGroup group = new ChatGroup();
-        group.setGropId(user.getId());
-        group.setGropName(user.getUsername());
+    @ResponseBody
+    public List<User> Search(User user,Model model){
+//        ChatGroup group = new ChatGroup();
+//        group.setGropId(user.getId());
+//        group.setGropName(user.getUsername());
+        while (user.getUsername().equals("") || user.getMail().equals("")) {
+            user.setUsername("_?/");
+            List<User> users = userService.search(user);
+            return users;
+        }
         List<User> users = userService.search(user);
-        List<ChatGroup> groups =groupService.search(group);
-        model.addAttribute("users",users);
-        model.addAttribute("groups",groups);
-        return "test_search";
+//        List<ChatGroup> groups =groupService.search(group);
+//        model.addAttribute("users",users);
+//        model.addAttribute("groups",groups);
+//        return "test_search";
+        return users;
     }
 
     //添加好友

@@ -18,7 +18,7 @@ public interface UserService {
 //    User userinfo(User user);
 
     //修改个人资料
-    Map<String, String> edituser(User user, HttpSession session);
+    Map<String, String> edituser(User user,String username, HttpSession session);
 
     //查找用户
     List<User> search(User user);

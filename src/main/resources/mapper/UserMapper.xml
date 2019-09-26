@@ -32,13 +32,13 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <!--  根据用户名和id进行查找-->
-  <select id="selectByIdOrName" parameterType="com.shixun.funchat.entity.User" resultMap="BaseResultMap">
-    select u.id,u.username
+  <!--  根据用户名和邮箱进行查找-->
+  <select id="selectByMailOrName" parameterType="com.shixun.funchat.entity.User" resultMap="BaseResultMap">
+    select u.id,u.username,u.mail
     from fun_user u
     <where>
-      <if test="id !=null and id !=''">
-        id like concat(#{id,jdbcType=INTEGER},'%')
+      <if test="mail !=null and mail !=''">
+        mail like concat(#{mail,jdbcType=VARCHAR},'%')
       </if>
       <if test="username !=null and username !=''">
         username like concat(#{username,jdbcType=VARCHAR},'%')
@@ -53,6 +53,13 @@
     from fun_user
     where username = #{username,jdbcType=VARCHAR}
     and password = #{password,jdbcType=VARCHAR}
+  </select>
+
+  <!--  查找用户名是否已经存在-->
+  <select id="CheckByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id
+    from fun_user
+    where username = #{username,jdbcType=VARCHAR}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

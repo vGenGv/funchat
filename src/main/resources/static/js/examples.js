@@ -1,5 +1,3 @@
-var ChatosExamle;
-
 $(function () {
 
     /**
@@ -7,9 +5,7 @@ $(function () {
      *
      **/
 
-
-
-    ChatosExamle = {
+    var ChatosExamle = {
         Message: {
             add: function (message, type) {
                 var chat_body = $('.layout .content .chat .chat-body');
@@ -20,12 +16,7 @@ $(function () {
 
                     $('.layout .content .chat .chat-body .messages').append('<div class="message-item ' + type + '"><div class="message-content">' + message + '</div><div class="message-action">PM 14:25 ' + (type ? '<i class="ti-check"></i>' : '') + '</div></div>');
 
-                    chat_body.scrollTop(chat_body.get(0).scrollHeight, -1).niceScroll({
-                        cursorcolor: 'rgba(66, 66, 66, 0.20)',
-                        cursorwidth: "4px",
-                        cursorborder: '0px'
-                    });
-
+                    chat_body.scrollTop(chat_body.get(0).scrollHeight, -1);
                 }
             }
         }
@@ -35,7 +26,10 @@ $(function () {
         ChatosExamle.Message.add();
     }, 1000);
 
-
+    setTimeout(function () {
+        // $('#disconnected').modal('show');
+        $('#call').modal('show');
+    }, 2000);
 
     $(document).on('submit', '.layout .content .chat .chat-footer form', function (e) {
         e.preventDefault();
@@ -46,7 +40,7 @@ $(function () {
         message = $.trim(message);
 
         if (message) {
-            ChatosExamle.Message.add(message, "outgoing-message"); //原来是outgoing-message,输入的文字显示在右侧
+            ChatosExamle.Message.add(message, 'outgoing-message');
             input.val('');
         } else {
             input.focus();
@@ -54,9 +48,7 @@ $(function () {
     });
 
     $(document).on('click', '.layout .content .sidebar-group .sidebar .list-group-item', function () {
-        if (jQuery.browser.mobile) {
-            $(this).closest('.sidebar-group').removeClass('mobile-open');
-        }
+        $(this).closest('.sidebar-group').removeClass('mobile-open');
     });
 
 });

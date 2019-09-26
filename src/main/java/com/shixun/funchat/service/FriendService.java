@@ -10,8 +10,10 @@ import java.util.Map;
 public interface FriendService {
     //好友列表
     List<User> listfriend(int id);
-    //删除好友
-    String deleteFriend(Integer[] ids, HttpSession session);
+    //批量删除好友
+    String deleteFriendSelective(Integer[] ids, HttpSession session);
+//    删除好友
+    String deleteFriend(String username, HttpSession session);
     //添加好友
     String addFriend(Integer id, HttpSession session);
 }

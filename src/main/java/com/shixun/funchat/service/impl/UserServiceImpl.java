@@ -38,8 +38,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, String> register(User user, HttpSession session){
         System.out.println(user.getUsername());//测试后台接收数据
-        int state = userMapper.insertSelective(user);
         Map<String, String> map = new HashMap<>();
+        User user1=userMapper.CheckByName(user.getUsername());
+        while (user1!=null){
+            map.put("msg","用户名已被使用，注册失败！");
+            return map;
+        }
+        int state = userMapper.insertSelective(user);
         if (state !=0){
             user = userMapper.selectByName(user);
             session.setAttribute("USER_SESSION", user);//注册成功，加入session
@@ -58,12 +63,17 @@ public class UserServiceImpl implements UserService {
 
     //修改个人资料
     @Override
-    public Map<String, String> edituser(User user, HttpSession session) {
-        int state = userMapper.updateByPrimaryKeySelective(user);
+    public Map<String, String> edituser(User user,String username, HttpSession session) {
         Map<String, String> map = new HashMap<>();
+        User user1=userMapper.CheckByName(user.getUsername());
+        while (user1!=null&& !username.equals(user.getUsername())){
+            map.put("msg","用户名已被使用，修改失败！");
+            return map;
+        }
+        int state = userMapper.updateByPrimaryKeySelective(user);
         if (state !=0){
             map.put("msg","修改成功");
-            session.setAttribute("USER_SESSION", user);//注册成功，加入session
+            session.setAttribute("USER_SESSION", user);//修改成功，加入session
         }
         else map.put("msg","修改失败");
         return map;
@@ -72,7 +82,7 @@ public class UserServiceImpl implements UserService {
     //查找用户
     @Override
     public List<User> search(User user) {
-        List<User> users= userMapper.selectByIdOrName(user);
+        List<User> users= userMapper.selectByMailOrName(user);
         return users;
     }
 }
