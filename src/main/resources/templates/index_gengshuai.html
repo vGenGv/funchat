@@ -5,13 +5,16 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Funchat - 聊得开心</title>
+    <title>Funchat - Have a fun!</title>
+
+    <!-- Favicon -->
+    <!--<link rel="icon" href="./media/img/favicon.png" type="image/png">-->
 
     <!-- Soho css -->
-    <link rel="stylesheet" href="/css/soho-funchat.min.css">
+    <link rel="stylesheet" href="./css/soho-funchat.min.css">
 
     <!-- Funchat css -->
-    <link rel="stylesheet" href="/css/funchat.css">
+    <link rel="stylesheet" href="./css/funchat.css">
 </head>
 <body>
 
@@ -262,7 +265,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="ti-pencil"></i>信息修改
+                        <i class="ti-pencil"></i> Profile Edit
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i class="ti-close"></i>
@@ -272,95 +275,78 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#personal" role="tab"
-                               aria-controls="personal" aria-selected="true">个人</a>
+                               aria-controls="personal" aria-selected="true">Personal</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#about" role="tab" aria-controls="about"
-                               aria-selected="false">签名</a>
+                               aria-selected="false">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#social-links" role="tab"
+                               aria-controls="social-links" aria-selected="false">Social Links</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane show active" id="personal" role="tabpanel">
                             <form>
                                 <div class="form-group">
-                                    <label for="username" class="col-form-label">用户名</label>
+                                    <label for="fullname" class="col-form-label">Fullname</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="ti-user"></i>
                                         </span>
                                         </div>
-                                        <input type="text" class="form-control" id="username">
+                                        <input type="text" class="form-control" id="fullname">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-form-label">头像</label>
+                                    <label class="col-form-label">Avatar</label>
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <figure class="avatar mr-3 item-rtl">
-                                                <img id="icon" src="./media/img/man_avatar3.jpg"
+                                                <img src="./media/img/man_avatar3.jpg"
                                                      class="rounded-circle">
                                             </figure>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customIconFile">
-                                            <label class="custom-file-label" for="customIconFile">选择文件</label>
+                                            <input type="file" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="gender" class="col-form-label">性别</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="ti-user"></i>
-                                        </span>
-                                        </div>
-                                        <input type="text" class="form-control" id="gender">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="birthday" class="col-form-label">生日</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="ti-user"></i>
-                                        </span>
-                                        </div>
-                                        <input type="text" class="form-control" id="birthday">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="telephone" class="col-form-label">电话</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="ti-mobile"></i>
-                                        </span>
-                                        </div>
-                                        <input type="text" class="form-control" id="telephone">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="addr" class="col-form-label">地址</label>
+                                    <label for="city" class="col-form-label">City</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="ti-map-alt"></i>
                                         </span>
                                         </div>
-                                        <input type="text" class="form-control" id="addr">
+                                        <input type="text" class="form-control" id="city">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="mail" class="col-form-label">邮箱</label>
+                                    <label for="phone" class="col-form-label">Phone</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="ti-mobile"></i>
+                                        </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="phone"
+                                               placeholder="(555) 555 55 55">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="website" class="col-form-label">Website</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="ti-link"></i>
                                         </span>
                                         </div>
-                                        <input type="text" class="form-control" id="mail">
+                                        <input type="text" class="form-control" id="website">
                                     </div>
                                 </div>
                             </form>
@@ -368,15 +354,104 @@
                         <div class="tab-pane" id="about" role="tabpanel">
                             <form action="">
                                 <div class="form-group">
-                                    <label for="sign" class="col-form-label">编写你的签名</label>
-                                    <textarea class="form-control" id="sign"></textarea>
+                                    <label for="about-text" class="col-form-label">Write a few words that describe
+                                        you</label>
+                                    <textarea class="form-control" id="about-text"></textarea>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" checked id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">View profile</label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="social-links" role="tabpanel">
+                            <form action="">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text bg-facebook">
+                                        <i class="ti-facebook"></i>
+                                    </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text bg-twitter">
+                                        <i class="ti-twitter"></i>
+                                    </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text bg-instagram">
+                                        <i class="ti-instagram"></i>
+                                    </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text bg-linkedin">
+                                        <i class="ti-linkedin"></i>
+                                    </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text bg-dribbble">
+                                        <i class="ti-dribbble"></i>
+                                    </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text bg-youtube">
+                                        <i class="ti-youtube"></i>
+                                    </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text bg-google">
+                                        <i class="ti-google"></i>
+                                    </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                    <span class="input-group-text bg-whatsapp">
+                                        <i class="fa fa-whatsapp"></i>
+                                    </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username">
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
@@ -951,8 +1026,7 @@
                                     <i class="ti-more"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" data-navigation-target="contact-information"
-                                       class="dropdown-item">信息</a>
+                                    <a href="#" data-navigation-target="contact-information" class="dropdown-item">信息</a>
                                     <a href="#" class="dropdown-item">退出</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="#" class="dropdown-item">删除</a>
@@ -1244,18 +1318,15 @@
     <!-- ./ layout -->
 
     <!-- JQuery -->
-    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
 
-    <!-- Popper -->
-    <script src="/js/popper.min.js"></script>
+    <!-- Popper.js -->
+    <script src="./js/popper.min.js"></script>
 
     <!-- Bootstrap -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
 
     <!-- Funchat -->
-    <script src="/js/funchat.js"></script>
-
-    <!-- Funchat -->
-    <script src="/js/index.js"></script>
+    <script src="./js/funchat.js"></script>
 </body>
 </html>

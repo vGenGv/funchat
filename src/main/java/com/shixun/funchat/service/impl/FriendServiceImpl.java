@@ -37,7 +37,8 @@ public class FriendServiceImpl implements FriendService {
     @Override
     public String deleteFriend(String username, HttpSession session) {
         User user = (User) session.getAttribute("USER_SESSION");
-        User user1=userMapper.CheckByName(username);
+        //User user1=userMapper.CheckByName(username);
+        User user1 = new User();
         Friend friend = new Friend();
         friend.setFriendaId(user1.getId());
         friend.setFriendbId(user.getId());
