@@ -16,12 +16,7 @@ $(function () {
 
                     $('.layout .content .chat .chat-body .messages').append('<div class="message-item ' + type + '"><div class="message-content">' + message + '</div><div class="message-action">PM 14:25 ' + (type ? '<i class="ti-check"></i>' : '') + '</div></div>');
 
-                    chat_body.scrollTop(chat_body.get(0).scrollHeight, -1).niceScroll({
-                        cursorcolor: 'rgba(66, 66, 66, 0.20)',
-                        cursorwidth: "4px",
-                        cursorborder: '0px'
-                    });
-
+                    chat_body.scrollTop(chat_body.get(0).scrollHeight, -1);
                 }
             }
         }
@@ -45,7 +40,7 @@ $(function () {
         message = $.trim(message);
 
         if (message) {
-            ChatosExamle.Message.add(message, "outgoing-message");
+            ChatosExamle.Message.add(message, 'outgoing-message');
             input.val('');
         } else {
             input.focus();
@@ -53,9 +48,7 @@ $(function () {
     });
 
     $(document).on('click', '.layout .content .sidebar-group .sidebar .list-group-item', function () {
-        if (jQuery.browser.mobile) {
-            $(this).closest('.sidebar-group').removeClass('mobile-open');
-        }
+        $(this).closest('.sidebar-group').removeClass('mobile-open');
     });
 
 });

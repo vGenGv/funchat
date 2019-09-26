@@ -66,6 +66,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         url.add("/fonts/**");
         url.add("/images/**");
         url.add("/img/**");
+        url.add("/icons/**");
+        url.add("/media/**");
         url.add("/*.html");
         url.add("/icons/**");
         return url;
