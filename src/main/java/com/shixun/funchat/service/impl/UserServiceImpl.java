@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
     public Map<String, String> edituser(User user,String username, HttpSession session) {
         Map<String, String> map = new HashMap<>();
         User user1=userMapper.CheckByName(user.getUsername());
-        while (user1!=null&& !username.equals(user.getUsername())){
+        if (user1!=null&& !username.equals(user.getUsername())){
             map.put("msg","用户名已被使用，修改失败！");
             return map;
         }

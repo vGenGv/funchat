@@ -5,6 +5,7 @@ import com.shixun.funchat.entity.User;
 import com.shixun.funchat.service.FriendService;
 import com.shixun.funchat.service.GroupService;
 import com.shixun.funchat.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,11 +68,11 @@ public class FriendController {
     //实现添加好友搜索和群搜索
     @PostMapping("/search")
     @ResponseBody
-    public List<User> Search(User user,Model model){
+    public List<User> Search(@RequestBody User user, Model model){
 //        ChatGroup group = new ChatGroup();
 //        group.setGropId(user.getId());
 //        group.setGropName(user.getUsername());
-        while (user.getUsername().equals("") || user.getMail().equals("")) {
+        if (StringUtils.isBlank(user.getUsername())) {
             user.setUsername("_?/");
             List<User> users = userService.search(user);
             return users;
