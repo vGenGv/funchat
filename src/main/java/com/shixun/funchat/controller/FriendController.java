@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,7 +68,7 @@ public class FriendController {
     //实现添加好友搜索和群搜索
     @PostMapping("/search")
     @ResponseBody
-    public List<User> Search(User user,Model model){
+    public List<User> Search(@RequestBody User user, Model model){
 //        ChatGroup group = new ChatGroup();
 //        group.setGropId(user.getId());
 //        group.setGropName(user.getUsername());
