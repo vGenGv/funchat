@@ -70,7 +70,7 @@ public class UserController {
         User user = (User) session.getAttribute("USER_SESSION");//从session中直接获得
 //        user = userService.userinfo(user);
         log.debug("查看个人资料用户: "+user.getUsername());
-        model.addAttribute("user",user);
+        model.addAttribute("userinfo",user);
         return "test_personal";
     }
 

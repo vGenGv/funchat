@@ -34,16 +34,10 @@
 
   <!--  根据用户名和邮箱进行查找-->
   <select id="selectByMailOrName" parameterType="com.shixun.funchat.entity.User" resultMap="BaseResultMap">
-    select u.id,u.username,u.mail
+    select u.id,u.username,u.mail,u.icon
     from fun_user u
-    <where>
-      <if test="mail !=null and mail !=''">
-        mail like concat(#{mail,jdbcType=VARCHAR},'%')
-      </if>
-      <if test="username !=null and username !=''">
-        username like concat(#{username,jdbcType=VARCHAR},'%')
-      </if>
-    </where>
+    where mail like concat(#{username,jdbcType=VARCHAR},'%')
+    or username like concat(#{username,jdbcType=VARCHAR},'%')
   </select>
 
 <!--  根据用户名和密码登录-->

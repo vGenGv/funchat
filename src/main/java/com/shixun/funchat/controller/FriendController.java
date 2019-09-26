@@ -5,6 +5,7 @@ import com.shixun.funchat.entity.User;
 import com.shixun.funchat.service.FriendService;
 import com.shixun.funchat.service.GroupService;
 import com.shixun.funchat.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class FriendController {
 //        ChatGroup group = new ChatGroup();
 //        group.setGropId(user.getId());
 //        group.setGropName(user.getUsername());
-        while (user.getUsername().equals("") || user.getMail().equals("")) {
+        if (StringUtils.isBlank(user.getUsername())) {
             user.setUsername("_?/");
             List<User> users = userService.search(user);
             return users;
