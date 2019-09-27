@@ -1,6 +1,48 @@
 !$(function () {
     //初始对象
     var funChat = {
+        Search: {
+            updateList: function (id, list) {
+                var o = $("#" + id + " .modal-dialog .modal-content .modal-body .list-group");
+                //清空列表
+                o.empty();
+                var str = "";
+                for (var i = 0; i < list.length; i++) {
+                    str += this.listDom(list[i]);
+                }
+                o.append(str);
+            },
+            listDom: function (item) {
+                var str = '<li class="list-group-item"';
+                var datalist = item.datalist ? item.datalist : [];
+                for (var i = 0; i < datalist.length; i++) {
+                    if (typeof (datalist[i].key) != "undefined")
+                        str += ' data-' + datalist[i].key + '="' + datalist[i].value + '" ';
+                }
+                str +=
+                    '>\n' +
+                    '    <div class="row align-items-center justify-content-center">\n' +
+                    '        <div class="avatar-group">\n' +
+                    '            <figure class="avatar avatar-lg">\n' +
+                    '            <span class="avatar-title bg-' + (item.color ? item.color : 'success') + ' rounded-circle">\n' +
+                    '                ' + (item.icon ? item.icon : 'C') + '\n' +
+                    '            </span>\n' +
+                    '            </figure>\n' +
+                    '        </div>\n' +
+                    '        <div class="col-5">\n' +
+                    '            <h4>' + (item.title ? item.title : 'Title') + '</h4>\n' +
+                    '            <p>' + (item.description ? item.description : 'Description') + '</p>\n' +
+                    '        </div>\n' +
+                    '        <div>\n' +
+                    '            <button type="button" class="btn btn-primary" data-list-button="' +
+                    (item.button_value ? item.button_value : '') + '">' +
+                    (item.button_text ? item.button_text : 'Button') + '</button>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</li>';
+                return str;
+            }
+        },
         List: {
             updateList: function (id, list) {
                 var o = $("#" + id + " .sidebar-body .list-group");
