@@ -359,7 +359,6 @@
         )
     });
 
-
     //弹出群聊信息模态框
     $(document).on("click", ".list-group-item [data-list-dropdown='message']", function () {
         var o = $(this).closest(" .list-group-item");
