@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
      * @return null 注册失败 其他 注册成功的用户信息
      */
     @Override
+    @Transactional
     public User register(User user) {
         if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword()))
             return null;
@@ -70,6 +71,7 @@ public class UserServiceImpl implements UserService {
      * @return null 更新失败 其他 更新后的用户信息
      */
     @Override
+    @Transactional
     public User updateUserInfo(User user) {
         if (user.getId() == null) //ID 为空
             return null;
@@ -88,10 +90,17 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    //查找用户
+    /**
+     * 获取用户信息
+     *
+     * @param userId 用户ID
+     * @return null 没有找到用户 其他 用户信息
+     */
     @Override
-    public List<User> search(User user) {
-        //List<User> users = userMapper.selectByMailOrName(user);
-        return new ArrayList<User>();
+    public User getUserInfo(Integer userId) {
+        if (userId == null)
+            return null;
+        return userMapper.selectByPrimaryKey(userId);
     }
+
 }

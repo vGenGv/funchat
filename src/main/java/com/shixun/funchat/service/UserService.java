@@ -2,10 +2,6 @@ package com.shixun.funchat.service;
 
 import com.shixun.funchat.entity.User;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
-
 public interface UserService {
 
     /**
@@ -33,6 +29,11 @@ public interface UserService {
      */
     User updateUserInfo(User user);
 
-    //查找用户
-    List<User> search(User user);
+    /**
+     * 获取用户信息
+     *
+     * @param userId 用户ID
+     * @return null 没有找到用户 其他 用户信息
+     */
+    User getUserInfo(Integer userId);
 }

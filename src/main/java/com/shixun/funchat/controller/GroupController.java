@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class GroupController {
@@ -34,8 +35,8 @@ public class GroupController {
      */
     @PostMapping("/GroupControl")
     @ResponseBody
-    public String groupControl(@RequestBody String jsonString, HttpSession session) {
-        HashMap<String, Object> map = new HashMap<>();
+    public Map<String, Object> groupControl(@RequestBody String jsonString, HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
         map.put("result", "error");
         map.put("error_info", "Default error!");
 
@@ -178,9 +179,7 @@ public class GroupController {
             }
         }
 
-        JSONObject rs_json = (JSONObject) JSON.toJSON(map);
-        log.info("rs_json = " + rs_json.toJSONString());
-        return rs_json.toJSONString();
+        return map;
     }
 
 }
