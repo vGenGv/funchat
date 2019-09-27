@@ -49,7 +49,7 @@
     </div>
     <!-- ./ call modal -->
 
-    <!-- add friends modal -->
+    <!-- 添加好友模态框 -->
     <div class="modal fade" id="addFriends" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
 
@@ -57,32 +57,49 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="ti-user"></i> Add Friends
+                        <i class="ti-user"></i> 添加好友
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i class="ti-close"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-info">Send invitations to friends.</div>
+                    <div class="alert alert-info">输入好友名称</div>
                     <form>
-                        <div class="form-group">
-                            <label for="emails" class="col-form-label">Email addresses</label>
-                            <input type="text" class="form-control" id="emails">
-                        </div>
-                        <div class="form-group">
-                            <label for="message" class="col-form-label">Invitation message</label>
-                            <textarea class="form-control" id="message"></textarea>
+                        <div class="form-row align-items-center">
+                            <div class="col">
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-primary">搜索</button>
+                            </div>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="avatar-group">
+                                    <figure class="avatar avatar-lg">
+                                    <span class="avatar-title bg-warning rounded-circle">
+                                        A
+                                    </span>
+                                    </figure>
+                                </div>
+                                <div class="col-5">
+                                    <h4>好友1</h4>
+                                    <p>ID:000</p>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary">添加</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ./ add friends modal -->
+    <!-- ./ 添加好友模态框 -->
 
     <!-- new group modal -->
     <div class="modal fade" id="newGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -383,16 +400,16 @@
     </div>
     <!-- ./ edit profile modal -->
 
-    <!-- layout -->
+    <!-- 整体布局 -->
     <div class="layout">
 
-        <!-- navigation -->
+        <!-- 左侧导航栏 -->
         <nav class="navigation">
             <div class="nav-group">
                 <ul>
                     <li>
                         <a class="logo" href="#">
-                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  width="33.004px" height="33.003px" viewBox="0 0 33.004 33.003"
                                  style="enable-background:new 0 0 33.004 33.003;"
@@ -408,21 +425,6 @@
                                     <circle cx="21.168" cy="16.043" r="1.833"/>
                                 </g>
                             </g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
-                                <g></g>
                         </svg>
                         </a>
                     </li>
@@ -447,22 +449,22 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./login.html">
+                        <a href="/logout">
                             <i class="ti-power-off"></i>
                         </a>
                     </li>
                 </ul>
             </div>
         </nav>
-        <!-- ./ navigation -->
+        <!-- ./ 左侧导航栏 -->
 
-        <!-- content -->
+        <!-- 内容 -->
         <div class="content">
 
-            <!-- sidebar group -->
+            <!-- 右侧窗口组 -->
             <div class="sidebar-group">
 
-                <!-- Chats sidebar -->
+                <!-- 聊天列表 -->
                 <div id="chats" class="sidebar active">
                     <header>
                         <span>聊天</span>
@@ -533,9 +535,9 @@
                         </ul>
                     </div>
                 </div>
-                <!-- ./ Chats sidebar -->
+                <!-- ./ 聊天列表 -->
 
-                <!-- Friends sidebar -->
+                <!-- 好友列表 -->
                 <div id="friends" class="sidebar">
                     <header>
                         <span>好友</span>
@@ -557,7 +559,7 @@
                             <li class="list-group-item">
                                 <div class="avatar-group">
                                     <figure class="avatar">
-                                    <span class="avatar-title bg-warning bg-success rounded-circle">
+                                    <span class="avatar-title bg-success rounded-circle">
                                         A
                                     </span>
                                     </figure>
@@ -571,38 +573,11 @@
                                                 <i class="ti-more"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item">Open</a>
+                                                <a href="#" class="dropdown-item">打开</a>
                                                 <a href="#" data-navigation-target="contact-information"
-                                                   class="dropdown-item">Profile</a>
-                                                <a href="#" class="dropdown-item">Add to archive</a>
-                                                <a href="#" class="dropdown-item">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="avatar-group">
-                                    <figure class="avatar">
-                                    <span class="avatar-title bg-warning bg-success rounded-circle">
-                                        B
-                                    </span>
-                                    </figure>
-                                </div>
-                                <div class="users-list-body">
-                                    <h5>好友2</h5>
-                                    <p>这是好友2</p>
-                                    <div class="users-list-action action-toggle">
-                                        <div class="dropdown">
-                                            <a data-toggle="dropdown" href="#">
-                                                <i class="ti-more"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="dropdown-item">Open</a>
-                                                <a href="#" data-navigation-target="contact-information"
-                                                   class="dropdown-item">Profile</a>
-                                                <a href="#" class="dropdown-item">Add to archive</a>
-                                                <a href="#" class="dropdown-item">Delete</a>
+                                                   class="dropdown-item">信息</a>
+                                                <a href="#" class="dropdown-item">退出</a>
+                                                <a href="#" class="dropdown-item">删除</a>
                                             </div>
                                         </div>
                                     </div>
@@ -611,12 +586,12 @@
                         </ul>
                     </div>
                 </div>
-                <!-- ./ Friends sidebar -->
+                <!-- ./ 好友列表 -->
 
             </div>
-            <!-- ./ sidebar group -->
+            <!-- ./ 右侧窗口组 -->
 
-            <!-- chat -->
+            <!-- 聊天区域 -->
             <div class="chat">
                 <div class="chat-header">
                     <div class="chat-header-user">
@@ -665,7 +640,7 @@
                     <!--
                     <div class="no-message-container">
                         <i class="fa fa-comments-o"></i>
-                        <p>Select a chat to read messages</p>
+                        <p>选择一个群聊</p>
                     </div>
                     -->
                     <div class="messages">
@@ -746,26 +721,31 @@
                     </div>
                 </div>
                 <div class="chat-footer">
-                    <form action="">
-                        <input type="text" class="form-control" placeholder="Recipient's username"
+                    <form>
+                        <input type="text" class="form-control" placeholder="在此处输入消息"
                                aria-label="Recipient's username" aria-describedby="button-addon2">
                         <div class="form-buttons">
+                            <!--
                             <button class="btn btn-light btn-floating" type="button">
                                 <i class="fa fa-paperclip"></i>
                             </button>
                             <button class="btn btn-light btn-floating" type="button">
                                 <i class="fa fa-microphone"></i>
                             </button>
-                            <button class="btn btn-primary btn-floating" type="submit">
+                            -->
+                            <button class="btn btn-primary btn-floating" type="button">
                                 <i class="fa fa-send"></i>
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
-            <!-- ./ chat -->
+            <!-- ./ 聊天区域 -->
 
+            <!-- 左侧窗口组 -->
             <div class="sidebar-group">
+
+                <!-- 信息列表 -->
                 <div id="contact-information" class="sidebar">
                     <header>
                         <span>About</span>
@@ -935,13 +915,16 @@
                         </div>
                     </div>
                 </div>
+                <!-- ./ 信息列表 -->
+
             </div>
+            <!-- ./ 左侧窗口组 -->
 
         </div>
-        <!-- ./ content -->
+        <!-- ./ 内容 -->
 
     </div>
-    <!-- ./ layout -->
+    <!-- ./ 整体布局 -->
 
     <!-- JQuery -->
     <script src="/js/jquery-3.4.1.min.js"></script>
@@ -955,7 +938,7 @@
     <!-- Funchat -->
     <script src="/js/funchat.js"></script>
 
-    <!-- Funchat -->
+    <!-- Index -->
     <script src="/js/index.js"></script>
 </body>
 </html>

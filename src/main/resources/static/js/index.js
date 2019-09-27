@@ -11,7 +11,7 @@
                 {func: "displayGroup"},
                 {
                     success_call: function (map) {
-                        let list = [];
+                        var list = [];
                         for (var i = 0; i < map.return.length; i++) {
                             var item = {};
                             var o = map.return[i];
@@ -31,7 +31,7 @@
                     }
                 })
         },
-        displayFriend:function () {
+        displayFriend: function () {
             var list = [];
             funChat.Utils.jsonAjax("/FriendControl", "post",
                 {func: "getUserFriendsAccept"},
@@ -42,20 +42,20 @@
                             var o = map.return[i];
                             item.title = o.username;
                             item.description = "ID: " + o.id;
-                            item.color = "success";
+                            item.color = funChat.Utils.color.cyan;
                             item.icon = funChat.Utils.randomLetter(1, 26);
                             item.downlist = [];
                             item.downlist.push({text: "资料", value: "message"});
                             item.downlist.push({text: "删除", value: "delete"});
                             item.datalist = [];
-                            item.datalist.push({key: "user-id", value: o.id});
-                            item.datalist.push({key: "user-name", value: o.username});
-                            item.datalist.push({key: "user-gender", value: o.geder});
-                            item.datalist.push({key: "user-tel", value: o.telephone});
-                            item.datalist.push({key: "user-email", value: o.mail});
-                            item.datalist.push({key: "user-addr", value: o.addr});
-                            item.datalist.push({key: "user-sign", value: o.perSignature});
-                            item.datalist.push({key: "user-birthday", value: o.birthday});
+                            item.datalist.push({key: "user-id", value: o.id ? o.id : ""});
+                            item.datalist.push({key: "user-name", value: o.username ? o.username : ""});
+                            item.datalist.push({key: "user-gender", value: o.geder ? o.geder : ""});
+                            item.datalist.push({key: "user-tel", value: o.telephone ? o.telephone : ""});
+                            item.datalist.push({key: "user-email", value: o.mail ? o.mail : ""});
+                            item.datalist.push({key: "user-addr", value: o.addr ? o.addr : ""});
+                            item.datalist.push({key: "user-sign", value: o.perSignature ? o.perSignature : ""});
+                            item.datalist.push({key: "user-birthday", value: o.birthday ? o.birthday : ""});
                             item.datalist.push({key: "user-color", value: item.color});
                             item.datalist.push({key: "user-icon", value: item.icon});
                             list.push(item);
