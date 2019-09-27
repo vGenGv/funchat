@@ -35,7 +35,7 @@ public class FriendController {
     private GroupService groupService;
 
     /**
-     * 群聊控制
+     * 好友管理控制
      *
      * @param jsonString JSON字符串
      * @param session    HTTP 会话

@@ -1,6 +1,54 @@
 !$(function () {
     //初始对象
     var funChat = {
+        List: {
+            updateList: function (id, list) {
+                var o = $("#" + id + " .sidebar-body .list-group");
+                //清空列表
+                o.empty();
+                for (i = 0; i < list.length; i++) {
+                    o.append(this.listDom(list[i]));
+                }
+            },
+            listDom: function (item) {
+                var str = '<li class="list-group-item"';
+                var datalist = item.datalist ? item.datalist : [];
+                for (i = 0; i < datalist.length; i++) {
+                    if (typeof (datalist[i].key) != "undefined")
+                        str += ' data-' + datalist[i].key + '="' + datalist[i].value + '" ';
+                }
+                str +=
+                    '>\n' +
+                    '    <div class="avatar-group">\n' +
+                    '        <figure class="avatar">\n' +
+                    '        <span class="avatar-title bg-' + (item.color ? item.color : 'success') + ' rounded-circle">\n' +
+                    '            ' + (item.icon ? item.icon : 'C') + '\n' +
+                    '        </span>\n' +
+                    '        </figure>\n' +
+                    '    </div>\n' +
+                    '    <div class="users-list-body">\n' +
+                    '        <h5>' + (item.title ? item.title : 'Title') + '</h5>\n' +
+                    '        <p>' + (item.description ? item.description : 'Description') + '</p>\n' +
+                    '        <div class="users-list-action action-toggle">\n' +
+                    '            <div class="dropdown">\n' +
+                    '                <a data-toggle="dropdown" href="#">\n' +
+                    '                    <i class="ti-more"></i>\n' +
+                    '                </a>\n' +
+                    '                <div class="dropdown-menu dropdown-menu-right">\n';
+                var downlist = item.downlist ? item.downlist : [];
+                for (i = 0; i < downlist.length; i++) {
+                    if (typeof (downlist[i].text) != "undefined")
+                        str += '                    <a href="#" class="dropdown-item" data-list-dropdown="' + downlist[i].value + '">' + downlist[i].text + '</a>\n';
+                }
+                str +=
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</li>';
+                return str;
+            }
+        },
         Utils: {
             jsonAjax: function (url, type, data, func, error_call) {
                 if (typeof (func) == "object") {
@@ -57,6 +105,19 @@
                 other_call: function (map) {
                     console.log("jsonAjax error: Undefined result");
                 }
+            },
+            randomNum: function (minNum, maxNum) {
+                switch (arguments.length) {
+                    case 1:
+                        return parseInt(Math.random() * minNum + 1, 10);
+                    case 2:
+                        return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+                    default:
+                        return 0;
+                }
+            },
+            randomLetter: function (minLetter, maxLetter) {
+                return String.fromCharCode(64 + this.randomNum(minLetter, maxLetter));
             }
         },
         Started: {

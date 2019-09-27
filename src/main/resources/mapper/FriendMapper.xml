@@ -23,10 +23,14 @@
   <sql id="Base_Column_List">
     friendA_id, friendB_id, accept
   </sql>
+  <sql id="Base_Column_List_My">
+    u.id, u.username, u.telephone, u.icon, u.geder, u.birthday, u.addr, u.mail, u.per_signature
+  </sql>
 
   <!-- 已接受的好友-根据id关联查找fun_user表和friend表 -->
   <select id="selectUserFriendsAccept" parameterType="java.lang.Integer" resultMap="BaseResultMapUser">
-    select u.id u.username u.telephone u.icon u.geder u.birthday u.addr u.mail u.per_signature
+    select
+    <include refid="Base_Column_List_My" />
     from friend f,fun_user u
     where f.accept = 1 and
     ((f.friendA_id = #{id,jdbcType=INTEGER} and f.friendB_id = u.id) or
@@ -35,14 +39,16 @@
 
   <!-- 未接受的好友-根据id关联查找fun_user表和friend表 -->
   <select id="selectUserFriendsNotAccept" parameterType="java.lang.Integer" resultMap="BaseResultMapUser">
-    select u.id u.username u.telephone u.icon u.geder u.birthday u.addr u.mail u.per_signature
+    select
+    <include refid="Base_Column_List_My" />
     from friend f,fun_user u
     where f.accept = 0 and f.friendA_id = #{id,jdbcType=INTEGER} and f.friendB_id = u.id
   </select>
 
   <!-- 好友请求-根据id关联查找fun_user表和friend表 -->
   <select id="getUserWantFriends" parameterType="java.lang.Integer" resultMap="BaseResultMapUser">
-    select u.id u.username u.telephone u.icon u.geder u.birthday u.addr u.mail u.per_signature
+    select
+    <include refid="Base_Column_List_My" />
     from friend f,fun_user u
     where f.accept = 0 and f.friendB_id = #{id,jdbcType=INTEGER} and f.friendA_id = u.id
   </select>
