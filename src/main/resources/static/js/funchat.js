@@ -120,6 +120,17 @@
             },
             randomLetter: function (minLetter, maxLetter) {
                 return String.fromCharCode(64 + this.randomNum(minLetter, maxLetter));
+            },
+            color: {
+                blue: "primary",
+                gray_dark: "secondary",
+                green: "success",
+                red: "danger",
+                orange: "warning",
+                cyan: "info",
+                gray_light: "light",
+                black: "dark",
+                white: "white"
             }
         },
         Started: {
