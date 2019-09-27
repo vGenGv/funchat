@@ -6,6 +6,38 @@
 
 !$(function () {
     var iNdex = {
+        Ws: {
+            ws: undefined,
+            openWebSocket: function () {
+                if (typeof (WebSocket) == "undefined") {
+                    console.log("openSocket: 您的浏览器不支持WebSocket");
+                } else {
+                    console.log("openSocket: 您的浏览器支持WebSocket");
+                    var socketUrl = "ws://" + window.location.host + "/websocket?userID=" + $("#userId").val();
+                    socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
+                    console.log(socketUrl);
+                    socket = new WebSocket(socketUrl);
+                    //打开事件
+                    socket.onopen = function () {
+                        console.log("websocket已打开");
+                    };
+                    //获得消息事件
+                    socket.onmessage = function (msg) {
+                        console.log("接收消息");
+                        console.log(msg.data);
+                        //发现消息进入    开始处理前端触发逻辑
+                    };
+                    //关闭事件
+                    socket.onclose = function () {
+                        console.log("websocket已关闭");
+                    };
+                    //发生了错误事件
+                    socket.onerror = function () {
+                        console.log("websocket发生了错误");
+                    }
+                }
+            }
+        },
         displayGroup: function () {
             funChat.Utils.jsonAjax("/GroupControl", "post",
                 {func: "displayGroup"},
@@ -89,6 +121,9 @@
                                         item.datalist.push({key: "user-birthday", value: o.birthday ? o.birthday : ""});
                                         item.datalist.push({key: "user-color", value: item.color});
                                         item.datalist.push({key: "user-icon", value: item.icon});
+                                        item.datalist.push({key: "my-toggle", value: "navigation"});
+                                        item.datalist.push({key: "my-target", value: "contact-information"});
+                                        item.datalist.push({key: "user-info", value: "contact-information"});
                                         list.push(item);
                                     }
                                     funChat.List.updateList("friends", list);
@@ -146,48 +181,60 @@
     });
 
     //删除好友下拉菜单点击
-    $(document).on("click", "#friends [data-list-dropdown='delete']", function () {
+    $(document).on("click", "#friends [data-list-dropdown='delete']", function (e) {
         var o = $(this).closest(".list-group-item");
         var user_id = o.data("user-id");
         funChat.Utils.jsonAjax("/FriendControl", "post",
             {func: "deleteFriend", friendId: user_id}, {
                 success_call: function (map) {
                     o.remove();
+                    var oo = $(".sidebar-group .sidebar#contact-information");
+                    oo.removeClass("active");
+                    oo.closest(".sidebar-group").removeClass("mobile-open");
                 },
                 failed_call: function (map) {
                     alert("抱歉：删除好友失败！");
                 }
-            })
+            });
+        e.stopPropagation();
     });
 
     //接受好友下拉菜单点击
-    $(document).on("click", "#friends [data-list-dropdown='accept']", function () {
+    $(document).on("click", "#friends [data-list-dropdown='accept']", function (e) {
         var o = $(this).closest(".list-group-item");
         var user_id = o.data("user-id");
         funChat.Utils.jsonAjax("/FriendControl", "post",
             {func: "acceptFriend", friendId: user_id}, {
                 success_call: function (map) {
                     iNdex.displayFriend();
+                    var oo = $(".sidebar-group .sidebar#contact-information");
+                    oo.removeClass("active");
+                    oo.closest(".sidebar-group").removeClass("mobile-open");
                 },
                 failed_call: function (map) {
                     alert("抱歉：接受好友失败！");
                 }
-            })
+            });
+        e.stopPropagation();
     });
 
     //拒绝好友下拉菜单点击
-    $(document).on("click", "#friends [data-list-dropdown='reject']", function () {
+    $(document).on("click", "#friends [data-list-dropdown='reject']", function (e) {
         var o = $(this).closest(".list-group-item");
         var user_id = o.data("user-id");
         funChat.Utils.jsonAjax("/FriendControl", "post",
             {func: "rejectFriend", friendId: user_id}, {
                 success_call: function (map) {
                     iNdex.displayFriend();
+                    var oo = $(".sidebar-group .sidebar#contact-information");
+                    oo.removeClass("active");
+                    oo.closest(".sidebar-group").removeClass("mobile-open");
                 },
                 failed_call: function (map) {
                     alert("抱歉：拒绝好友失败！");
                 }
-            })
+            });
+        e.stopPropagation();
     });
 
     //搜索群聊按钮点击
@@ -256,7 +303,6 @@
     });
 
 
-
     $(document).on("click", ".list-group-item [data-list-dropdown='message']", function () {
         var o = $(this).closest(" .list-group-item");
         var group_id = o.data("group-id");
@@ -264,7 +310,7 @@
         $("#updateGroupInfoModal").modal('show');
 
         //attr('id',"idname")为id为upgrade_groupName的父元素中最近的的div添加一个id为 group_id
-        $("#upgrade_groupName").closest("div").attr('id',group_id);
+        $("#upgrade_groupName").closest("div").attr('id', group_id);
 
         //var group_name = o.data("group-name");
 
@@ -277,7 +323,7 @@
         //attr("id")获取被选元素的id
         var group_id = $("#upgrade_groupName").closest("div").attr("id");
 
-        console.log("获取到的id为："+group_id);
+        console.log("获取到的id为：" + group_id);
 
         funChat.Utils.jsonAjax("/GroupControl", "post",
             {func: "updateGroupInfo", groupId: group_id, groupName: group_name},

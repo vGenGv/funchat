@@ -15,39 +15,9 @@
 </head>
 <body>
 
-    <!-- page loading -->
+    <!-- 加载白屏 -->
     <div class="page-loading"></div>
-    <!-- ./ page loading -->
-
-    <!-- call modal -->
-    <div class="modal call fade" id="call" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="call">
-                        <div class="call-background" style="background: url(./media/img/call-bg.png)"></div>
-                        <div>
-                            <figure class="mb-4 avatar avatar-xl">
-                                <img src="./media/img/women_avatar1.jpg" class="rounded-circle">
-                            </figure>
-                            <h4 class="text-center">Jennica Kindred calling ...</h4>
-                            <div class="action-button">
-                                <button type="button" class="btn btn-danger btn-floating btn-lg"
-                                        data-dismiss="modal">
-                                    <i class="ti-close"></i>
-                                </button>
-                                <button type="button" class="btn btn-success btn-pulse btn-floating btn-lg">
-                                    <i class="fa fa-phone"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ./ call modal -->
+    <!-- ./ 加载白屏 -->
 
     <!-- 添加好友模态框 -->
     <div class="modal fade" id="addFriends" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -195,116 +165,6 @@
         </div>
     </div>
     <!-- ./ new group modal -->
-
-    <!-- setting modal -->
-    <div class="modal fade" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="ti-settings"></i> Settings
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="ti-close"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#account" role="tab"
-                               aria-controls="account" aria-selected="true">Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#notification" role="tab"
-                               aria-controls="notification" aria-selected="false">Notification</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-                               aria-selected="false">Security</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane show active" id="account" role="tabpanel">
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" checked id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Allow connected
-                                    contacts</label>
-                            </div>
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" checked id="customSwitch2">
-                                <label class="custom-control-label" for="customSwitch2">Confirm message
-                                    requests</label>
-                            </div>
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" checked id="customSwitch3">
-                                <label class="custom-control-label" for="customSwitch3">Profile privacy</label>
-                            </div>
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                                <label class="custom-control-label" for="customSwitch4">Developer mode
-                                    options</label>
-                            </div>
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" checked id="customSwitch5">
-                                <label class="custom-control-label" for="customSwitch5">Two-step security
-                                    verification</label>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="notification" role="tabpanel">
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" checked id="customSwitch6">
-                                <label class="custom-control-label" for="customSwitch6">Allow mobile
-                                    notifications</label>
-                            </div>
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch7">
-                                <label class="custom-control-label" for="customSwitch7">Notifications from your
-                                    friends</label>
-                            </div>
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch8">
-                                <label class="custom-control-label" for="customSwitch8">Send notifications by
-                                    email</label>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="contact" role="tabpanel">
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch9">
-                                <label class="custom-control-label" for="customSwitch9">Suggest changing passwords
-                                    every month.</label>
-                            </div>
-                            <div class="form-item custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" checked id="customSwitch10">
-                                <label class="custom-control-label" for="customSwitch10">Let me know about
-                                    suspicious entries to your account</label>
-                            </div>
-                            <div class="form-item">
-                                <p>
-                                    <a data-toggle="collapse" href="#collapseExample" role="button"
-                                       aria-expanded="false" aria-controls="collapseExample">
-                                        <span class="ti-plus btn-icon"></span> Security Questions
-                                    </a>
-                                </p>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Question 1">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Question 2">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ./ setting modal -->
 
     <!-- 编辑个人资料模态框 -->
     <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -520,11 +380,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#settingModal">
-                            <i class="ti-settings"></i>
-                        </a>
-                    </li>
-                    <li>
                         <a href="/logout">
                             <i class="ti-power-off"></i>
                         </a>
@@ -685,40 +540,12 @@
                             </small>
                         </div>
                     </div>
-                    <div class="chat-header-action">
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-success">
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary">
-                                    <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-secondary" data-toggle="dropdown">
-                                    <i class="ti-more"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" data-navigation-target="contact-information"
-                                       class="dropdown-item">信息</a>
-                                    <a href="#" class="dropdown-item">退出</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-item">删除</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
-                <div class="chat-body"> <!-- .no-message -->
-                    <!--
+                <div class="chat-body no-message"> <!-- .no-message -->
                     <div class="no-message-container">
                         <i class="fa fa-comments-o"></i>
                         <p>选择一个群聊</p>
                     </div>
-                    -->
                     <div class="messages">
                         <div class="message-item outgoing-message">
                             <div class="message-content">
@@ -801,14 +628,6 @@
                         <input type="text" class="form-control" placeholder="在此处输入消息"
                                aria-label="Recipient's username" aria-describedby="button-addon2">
                         <div class="form-buttons">
-                            <!--
-                            <button class="btn btn-light btn-floating" type="button">
-                                <i class="fa fa-paperclip"></i>
-                            </button>
-                            <button class="btn btn-light btn-floating" type="button">
-                                <i class="fa fa-microphone"></i>
-                            </button>
-                            -->
                             <button class="btn btn-primary btn-floating" type="button">
                                 <i class="fa fa-send"></i>
                             </button>
@@ -834,45 +653,7 @@
                         </ul>
                     </header>
                     <div class="sidebar-body">
-                        <div class="pl-4 pr-4 text-center">
-                            <figure class="avatar avatar-state-danger avatar-xl mb-4">
-                                <span class="avatar-title bg-success rounded-circle">
-                                    <i class="fa fa-users"></i>
-                                </span>
-                            </figure>
-                            <h5 class="text-primary">好友1</h5>
-                            <p class="text-muted">ID: 001</p>
-                        </div>
-                        <hr>
-                        <div class="pl-4 pr-4">
-                            <h6>性别</h6>
-                            <p class="text-muted">男</p>
-                        </div>
-                        <hr>
-                        <div class="pl-4 pr-4">
-                            <h6>生日</h6>
-                            <p class="text-muted">1997-12-01</p>
-                        </div>
-                        <hr>
-                        <div class="pl-4 pr-4">
-                            <h6>电话</h6>
-                            <p class="text-muted">8888-8888</p>
-                        </div>
-                        <hr>
-                        <div class="pl-4 pr-4">
-                            <h6>地址</h6>
-                            <p class="text-muted">Addr</p>
-                        </div>
-                        <hr>
-                        <div class="pl-4 pr-4">
-                            <h6>邮箱</h6>
-                            <p class="text-muted">xxxxxxx@qq.com</p>
-                        </div>
-                        <hr>
-                        <div class="pl-4 pr-4">
-                            <h6>签名</h6>
-                            <p class="text-muted">sldkjfl ajsdlkgjl skdjflk sjdlkf jlksdjflksjdgklj aklsdjflk sdjlk fjlsjdf</p>
-                        </div>
+                        <!-- 内容动态生成 -->
                     </div>
                 </div>
                 <!-- ./ 信息列表 -->
