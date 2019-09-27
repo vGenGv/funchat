@@ -19,6 +19,14 @@
     and s.id=#{id,jdbcType=INTEGER}
   </select>
 
+  <!-- 根据名称模糊搜索群聊 -->
+  <select id="selectByGroupName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from grop
+    where grop_name like concat(#{searchName,jdbcType=VARCHAR},"%")
+  </select>
+
   <!-- 选择性查找 -->
   <select id="selectBySelective" parameterType="com.shixun.funchat.entity.ChatGroup" resultMap="BaseResultMap">
     select

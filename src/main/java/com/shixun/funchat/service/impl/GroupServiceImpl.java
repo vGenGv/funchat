@@ -42,13 +42,11 @@ public class GroupServiceImpl implements GroupService {
         if (StringUtils.isBlank(s))
             return groups;
         //根据名称搜索
-        ChatGroup chatGroup = new ChatGroup();
-        chatGroup.setGropName(s);
-        groups = chatGroupMapper.selectBySelective(chatGroup);
+        groups = chatGroupMapper.selectByGroupName(s);
         try {
             //根据ID搜索
             Integer id = Integer.valueOf(s);
-            chatGroup.setGropName(null);
+            ChatGroup chatGroup = new ChatGroup();
             chatGroup.setGropId(id);
             groups.addAll(chatGroupMapper.selectBySelective(chatGroup));
         } catch (Exception e) {
