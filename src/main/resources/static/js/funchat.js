@@ -6,14 +6,16 @@
                 var o = $("#" + id + " .sidebar-body .list-group");
                 //清空列表
                 o.empty();
-                for (i = 0; i < list.length; i++) {
-                    o.append(this.listDom(list[i]));
+                var str = "";
+                for (var i = 0; i < list.length; i++) {
+                    str += this.listDom(list[i]);
                 }
+                o.append(str);
             },
             listDom: function (item) {
                 var str = '<li class="list-group-item"';
                 var datalist = item.datalist ? item.datalist : [];
-                for (i = 0; i < datalist.length; i++) {
+                for (var i = 0; i < datalist.length; i++) {
                     if (typeof (datalist[i].key) != "undefined")
                         str += ' data-' + datalist[i].key + '="' + datalist[i].value + '" ';
                 }
