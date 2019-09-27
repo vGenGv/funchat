@@ -73,7 +73,7 @@
         iNdex.displayFriend();
     });
 
-    //搜索好友按钮点击监听
+    //搜索好友按钮点击
     $(document).on("click", "#addFriends [data-modal-button='search']", function () {
         var search_name = $(this).closest("form").find("input").val();
         funChat.Utils.jsonAjax("/UserControl", "post",
@@ -96,6 +96,12 @@
                     funChat.Search.updateList("addFriends", list);
                 }
             })
+    });
+
+    //弹出加入群聊模态框点击
+    $(document).on("click", "#chats [data-my-toggle='modal']", function () {
+        var e = $(this).data("target");
+        $(e).modal('show');
     });
 
     $(document).on("click", "#chats [data-list-dropdown='delete']", function () {

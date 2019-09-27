@@ -212,6 +212,11 @@
         $(".chat+.sidebar-group .sidebar").removeClass("active");
     });
 
+    //点击含有 tooltip 的标签时隐藏 tooltip
+    $(document).on("click", '[data-toggle="tooltip"]', function () {
+        $(this).tooltip('hide');
+    });
+
     //点击导航切换 sidebar
     $(document).on("click", "[data-navigation-target]", function () {
         //获取源对象和目标对象
