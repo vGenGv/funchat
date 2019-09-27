@@ -217,6 +217,12 @@
         $(this).tooltip('hide');
     });
 
+    //自定义弹出模态框点击
+    $(document).on("click", "#chats [data-my-toggle='modal']", function () {
+        var e = $(this).data("target");
+        $(e).modal('show');
+    });
+
     //点击导航切换 sidebar
     $(document).on("click", "[data-navigation-target]", function () {
         //获取源对象和目标对象

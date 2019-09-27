@@ -98,12 +98,6 @@
             })
     });
 
-    //弹出加入群聊模态框点击
-    $(document).on("click", "#chats [data-my-toggle='modal']", function () {
-        var e = $(this).data("target");
-        $(e).modal('show');
-    });
-
     $(document).on("click", "#chats [data-list-dropdown='delete']", function () {
         // 这个this指向当前点击对象,this是JS对象的一个特殊指针，它的指向根据环境不同而发生变化
         var o = $(this).closest(".list-group-item");
