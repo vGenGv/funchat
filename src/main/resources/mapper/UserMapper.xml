@@ -29,6 +29,14 @@
     and s.grop_id = #{grop_id,jdbcType=INTEGER}
   </select>
 
+  <!-- 根据用户名称模糊查询 -->
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List_My" />
+    from fun_user u
+    where username like concat(#{searchName,jdbcType=VARCHAR},"%")
+  </select>
+
   <!-- 选择性查询 -->
   <select id="selectBySelective" parameterType="com.shixun.funchat.entity.User" resultMap="BaseResultMap">
     select

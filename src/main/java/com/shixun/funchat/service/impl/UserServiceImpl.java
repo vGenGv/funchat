@@ -117,13 +117,11 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.isBlank(s))
             return users;
         //根据名称搜索
-        User param_user = new User();
-        param_user.setUsername(s);
-        users = userMapper.selectBySelective(param_user);
+        users = userMapper.selectByUserName(s);
         try {
             //根据ID搜索
             Integer id = Integer.valueOf(s);
-            param_user.setUsername(null);
+            User param_user = new User();
             param_user.setId(id);
             users.addAll(userMapper.selectBySelective(param_user));
         } catch (Exception e) {
