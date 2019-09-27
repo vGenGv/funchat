@@ -45,7 +45,6 @@
                             item.color = funChat.Utils.color.cyan;
                             item.icon = funChat.Utils.randomLetter(1, 26);
                             item.downlist = [];
-                            item.downlist.push({text: "资料", value: "message"});
                             item.downlist.push({text: "删除", value: "delete"});
                             item.datalist = [];
                             item.datalist.push({key: "user-id", value: o.id ? o.id : ""});
@@ -60,7 +59,38 @@
                             item.datalist.push({key: "user-icon", value: item.icon});
                             list.push(item);
                         }
-                        funChat.List.updateList("friends", list);
+                        funChat.Utils.jsonAjax("/FriendControl", "post",
+                            {func: "getUserWantFriends"}, {
+                                success_call: function (map2) {
+                                    for (var i = 0; i < map2.return.length; i++) {
+                                        var item = {};
+                                        var o = map2.return[i];
+                                        item.title = "好友申请";
+                                        item.description = "名称: " + o.username + ", ID: " + o.id;
+                                        item.color = funChat.Utils.color.orange;
+                                        item.icon = funChat.Utils.randomLetter(1, 26);
+                                        item.downlist = [];
+                                        item.downlist.push({text: "接受", value: "accept"});
+                                        item.downlist.push({text: "拒绝", value: "reject"});
+                                        item.datalist = [];
+                                        item.datalist.push({key: "user-id", value: o.id ? o.id : ""});
+                                        item.datalist.push({key: "user-name", value: o.username ? o.username : ""});
+                                        item.datalist.push({key: "user-gender", value: o.geder ? o.geder : ""});
+                                        item.datalist.push({key: "user-tel", value: o.telephone ? o.telephone : ""});
+                                        item.datalist.push({key: "user-email", value: o.mail ? o.mail : ""});
+                                        item.datalist.push({key: "user-addr", value: o.addr ? o.addr : ""});
+                                        item.datalist.push({
+                                            key: "user-sign",
+                                            value: o.perSignature ? o.perSignature : ""
+                                        });
+                                        item.datalist.push({key: "user-birthday", value: o.birthday ? o.birthday : ""});
+                                        item.datalist.push({key: "user-color", value: item.color});
+                                        item.datalist.push({key: "user-icon", value: item.icon});
+                                        list.push(item);
+                                    }
+                                    funChat.List.updateList("friends", list);
+                                }
+                            });
                     }
                 })
         }
@@ -94,6 +124,20 @@
                         list.push(item);
                     }
                     funChat.Search.updateList("addFriends", list);
+                }
+            })
+    });
+
+    //添加好友按钮点击
+    $(document).on("click", "#addFriends [data-list-button='add']", function () {
+        var user_id = $(this).closest(".list-group-item").data("user-id");
+        funChat.Utils.jsonAjax("/FriendControl", "post",
+            {func: "addFriend", friendId: user_id}, {
+                success_call: function (map) {
+                    alert("发送好友请求成功！");
+                },
+                failed_call: function (map) {
+                    alert("抱歉：发送好友请求失败！");
                 }
             })
     });
