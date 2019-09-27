@@ -68,7 +68,7 @@
                                         item.title = "好友申请";
                                         item.description = "名称: " + o.username + ", ID: " + o.id;
                                         item.color = funChat.Utils.color.orange;
-                                        item.icon = funChat.Utils.randomLetter(1, 26);
+                                        item.icon = "Q";
                                         item.downlist = [];
                                         item.downlist.push({text: "接受", value: "accept"});
                                         item.downlist.push({text: "拒绝", value: "reject"});
@@ -138,6 +138,51 @@
                 },
                 failed_call: function (map) {
                     alert("抱歉：发送好友请求失败！");
+                }
+            })
+    });
+
+    //删除好友下拉菜单点击
+    $(document).on("click", "#friends [data-list-dropdown='delete']", function () {
+        var o = $(this).closest(".list-group-item");
+        var user_id = o.data("user-id");
+        funChat.Utils.jsonAjax("/FriendControl", "post",
+            {func: "deleteFriend", friendId: user_id}, {
+                success_call: function (map) {
+                    o.remove();
+                },
+                failed_call: function (map) {
+                    alert("抱歉：删除好友失败！");
+                }
+            })
+    });
+
+    //接受好友下拉菜单点击
+    $(document).on("click", "#friends [data-list-dropdown='accept']", function () {
+        var o = $(this).closest(".list-group-item");
+        var user_id = o.data("user-id");
+        funChat.Utils.jsonAjax("/FriendControl", "post",
+            {func: "acceptFriend", friendId: user_id}, {
+                success_call: function (map) {
+                    iNdex.displayFriend();
+                },
+                failed_call: function (map) {
+                    alert("抱歉：接受好友失败！");
+                }
+            })
+    });
+
+    //拒绝好友下拉菜单点击
+    $(document).on("click", "#friends [data-list-dropdown='reject']", function () {
+        var o = $(this).closest(".list-group-item");
+        var user_id = o.data("user-id");
+        funChat.Utils.jsonAjax("/FriendControl", "post",
+            {func: "rejectFriend", friendId: user_id}, {
+                success_call: function (map) {
+                    iNdex.displayFriend();
+                },
+                failed_call: function (map) {
+                    alert("抱歉：拒绝好友失败！");
                 }
             })
     });

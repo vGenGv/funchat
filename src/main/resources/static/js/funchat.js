@@ -200,6 +200,29 @@
     //启用 tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
+    //禁止回车提交表单
+    document.onkeydown = function(event) {
+        var target, code, tag;
+        if (!event) {
+            event = window.event; //针对ie浏览器
+            target = event.srcElement;
+            code = event.keyCode;
+            if (code === 13) {
+                tag = target.tagName;
+                if (tag == "TEXTAREA") { return true; }
+                else { return false; }
+            }
+        }
+        else {
+            target = event.target; //针对遵循w3c标准的浏览器，如Firefox
+            code = event.keyCode;
+            if (code === 13) {
+                tag = target.tagName;
+                return tag !== "INPUT";
+            }
+        }
+    };
+
     //初始化
     $(document).ready(function () {
         funChat.Started.init();
