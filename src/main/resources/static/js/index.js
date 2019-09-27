@@ -256,7 +256,7 @@
     });
 
 
-
+    //弹出群聊信息模态框
     $(document).on("click", ".list-group-item [data-list-dropdown='message']", function () {
         var o = $(this).closest(" .list-group-item");
         var group_id = o.data("group-id");
@@ -264,12 +264,10 @@
         $("#updateGroupInfoModal").modal('show');
 
         //attr('id',"idname")为id为upgrade_groupName的父元素中最近的的div添加一个id为 group_id
-        $("#upgrade_groupName").closest("div").attr('id',group_id);
-
-        //var group_name = o.data("group-name");
-
+        $("#upgrade_groupName").closest("div").attr('id', group_id);
     });
 
+    //修改群聊名称
     $("#update_group_info_btn").on('click', function () {
         //获取id为 upgrade_groupName 的修改后的group_name
         var group_name = $("#upgrade_groupName").val();
@@ -277,7 +275,7 @@
         //attr("id")获取被选元素的id
         var group_id = $("#upgrade_groupName").closest("div").attr("id");
 
-        console.log("获取到的id为："+group_id);
+        console.log("获取到的id为：" + group_id);
 
         funChat.Utils.jsonAjax("/GroupControl", "post",
             {func: "updateGroupInfo", groupId: group_id, groupName: group_name},
@@ -294,5 +292,24 @@
             }
         )
 
+    });
+
+    //添加群聊
+    $(document).on('click', "#newGroup .modal-footer .btn", function () {
+        var group_name = $(".form-group #group_name").val();
+        //console.log(group_name);
+        funChat.Utils.jsonAjax("/GroupControl", "post",
+            {func: "createGroup", groupName: group_name},
+            {
+                success_call: function (map) {
+                    alert("创建新的群聊成功！");
+                    $("#newGroup").modal('hide');
+                    iNdex.displayGroup();
+                },
+                failed_call: function (map) {
+                    alert("参数错误！");
+                }
+            }
+        )
     });
 });
