@@ -73,6 +73,7 @@
         iNdex.displayFriend();
     });
 
+    //删除群聊
     $(document).on("click", "#chats [data-list-dropdown='delete']", function () {
         // 这个this指向当前点击对象,this是JS对象的一个特殊指针，它的指向根据环境不同而发生变化
         var o = $(this).closest(".list-group-item");
@@ -83,6 +84,7 @@
             {func: "isOwner", groupId: group_id},
             {
                 success_call: function (map) {
+                    //删除这个类为 list-group-item 的整个对象
                     o.remove();
                     alert("删除groupId为" + group_id + "的群成功！");
                 },
@@ -93,4 +95,44 @@
         )
     });
 
+
+
+    $(document).on("click", ".list-group-item [data-list-dropdown='message']", function () {
+        var o = $(this).closest(" .list-group-item");
+        var group_id = o.data("group-id");
+        //让id为 updateGroupInfoModal 的 模态框 显示出来
+        $("#updateGroupInfoModal").modal('show');
+
+        //attr('id',"idname")为id为upgrade_groupName的父元素中最近的的div添加一个id为 group_id
+        $("#upgrade_groupName").closest("div").attr('id',group_id);
+
+        //var group_name = o.data("group-name");
+
+    });
+
+    $("#update_group_info_btn").on('click', function () {
+        //获取id为 upgrade_groupName 的修改后的group_name
+        var group_name = $("#upgrade_groupName").val();
+        console.log("从模态框取group_name:" + group_name);
+        //attr("id")获取被选元素的id
+        var group_id = $("#upgrade_groupName").closest("div").attr("id");
+
+        console.log("获取到的id为："+group_id);
+
+        funChat.Utils.jsonAjax("/GroupControl", "post",
+            {func: "updateGroupInfo", groupId: group_id, groupName: group_name},
+            {
+                success_call: function (map) {
+                    alert("更新群聊信息成功！");
+                    //隐藏模态框并把群聊列表重新显示出来
+                    $("#updateGroupInfoModal").modal('hide');
+                    iNdex.displayGroup();
+                },
+                failed_call: function (map) {
+                    alert("没有权限！");
+                }
+            }
+        )
+
+    });
 });
