@@ -1,6 +1,33 @@
 !$(function () {
     //初始对象
     var funChat = {
+        Info: {
+            updateInfo: function (id, list) {
+                var o = $(".sidebar-group .sidebar#" + id + " .sidebar-body");
+                o.empty();
+                var str =
+                    '<div class="pl-4 pr-4 text-center">\n' +
+                    '    <figure class="avatar avatar-state-danger avatar-xl mb-4">\n' +
+                    '        <span class="avatar-title bg-' + (list.color ? list.color : 'success') + ' rounded-circle">\n' +
+                    '            ' + (list.icon ? list.icon : 'X') + '\n' +
+                    '        </span>\n' +
+                    '    </figure>\n' +
+                    '    <h5 class="text-primary">' + (list.name ? list.name : 'Name') + '</h5>\n' +
+                    '    <p class="text-muted">User ID: ' + (list.id ? list.id : 'ID') + '</p>\n' +
+                    '</div>';
+                for (var i = 0; i < list.items.length; i++) {
+                    str += this.listDom(list.items[i]);
+                }
+                o.append(str);
+            },
+            listDom: function (item) {
+                return '<hr>\n' +
+                    '<div class="pl-4 pr-4">\n' +
+                    '    <h6>' + (item.text ? item.text : 'Text') + '</h6>\n' +
+                    '    <p class="text-muted">' + (item.content ? item.content : 'null') + '</p>\n' +
+                    '</div>';
+            }
+        },
         Search: {
             updateList: function (id, list) {
                 var o = $("#" + id + " .modal-dialog .modal-content .modal-body .list-group");
@@ -201,7 +228,7 @@
     $('[data-toggle="tooltip"]').tooltip();
 
     //禁止回车提交表单
-    document.onkeydown = function(event) {
+    document.onkeydown = function (event) {
         var target, code, tag;
         if (!event) {
             event = window.event; //针对ie浏览器
@@ -209,11 +236,13 @@
             code = event.keyCode;
             if (code === 13) {
                 tag = target.tagName;
-                if (tag == "TEXTAREA") { return true; }
-                else { return false; }
+                if (tag == "TEXTAREA") {
+                    return true;
+                } else {
+                    return false;
+                }
             }
-        }
-        else {
+        } else {
             target = event.target; //针对遵循w3c标准的浏览器，如Firefox
             code = event.keyCode;
             if (code === 13) {
@@ -241,9 +270,23 @@
     });
 
     //自定义弹出模态框点击
-    $(document).on("click", "#chats [data-my-toggle='modal']", function () {
-        var e = $(this).data("target");
+    $(document).on("click", "[data-my-toggle='modal']", function () {
+        var e = $(this).data("my-target");
         $(e).modal('show');
+    });
+
+    //自定义导航
+    $(document).on("click", "[data-my-toggle='navigation']", function () {
+        var e = $(this).data("my-target"),
+            o = $(".sidebar-group .sidebar#" + e);
+        //sidebar 切换
+        o.closest(".sidebar-group").find(".sidebar").removeClass("active");
+        o.addClass("active");
+        //小屏幕切换
+        funChat.Started.mobile && ($(".sidebar-group").removeClass("mobile-open"),
+            o.closest(".sidebar-group").addClass("mobile-open"));
+        //设置 sidebar 内的焦点
+        o.find("form input:first").focus();
     });
 
     //点击导航切换 sidebar
@@ -254,13 +297,14 @@
         //sidebar 切换
         o.closest(".sidebar-group").find(".sidebar").removeClass("active");
         o.addClass("active");
+        //小屏幕切换
+        funChat.Started.mobile && ($(".sidebar-group").removeClass("mobile-open"),
+            o.closest(".sidebar-group").addClass("mobile-open"));
         //设置 sidebar 内的焦点
         o.find("form input:first").focus();
         //导航切换
         $("[data-navigation-target]").removeClass("active");
         $('[data-navigation-target="' + e + '"]').addClass("active");
-        funChat.Started.mobile && ($(".sidebar-group").removeClass("mobile-open"),
-            o.closest(".sidebar-group").addClass("mobile-open"));
     });
 
     //关闭 sidebar

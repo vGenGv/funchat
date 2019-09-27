@@ -57,6 +57,9 @@
                             item.datalist.push({key: "user-birthday", value: o.birthday ? o.birthday : ""});
                             item.datalist.push({key: "user-color", value: item.color});
                             item.datalist.push({key: "user-icon", value: item.icon});
+                            item.datalist.push({key: "my-toggle", value: "navigation"});
+                            item.datalist.push({key: "my-target", value: "contact-information"});
+                            item.datalist.push({key: "user-info", value: "contact-information"});
                             list.push(item);
                         }
                         funChat.Utils.jsonAjax("/FriendControl", "post",
@@ -210,6 +213,24 @@
                     funChat.Search.updateList("joinGroups", list);
                 }
             })
+    });
+
+    //用户信息显示点击
+    $(document).on("click", "[data-user-info]", function () {
+        var e = $(this).data("user-info");
+        var list = {};
+        list.name = $(this).data("user-name");
+        list.id = $(this).data("user-id");
+        list.color = $(this).data("user-color");
+        list.icon = $(this).data("user-icon");
+        list.items = [];
+        list.items.push({text: "性别", content: $(this).data("user-gender")});
+        list.items.push({text: "生日", content: $(this).data("user-birthday")});
+        list.items.push({text: "电话", content: $(this).data("user-tel")});
+        list.items.push({text: "地址", content: $(this).data("user-addr")});
+        list.items.push({text: "邮箱", content: $(this).data("user-email")});
+        list.items.push({text: "签名", content: $(this).data("user-sign")});
+        funChat.Info.updateInfo(e, list);
     });
 
     $(document).on("click", "#chats [data-list-dropdown='delete']", function () {
