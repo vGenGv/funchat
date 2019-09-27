@@ -68,11 +68,15 @@
                             item.color = "success";
                             item.icon = funChat.Utils.randomLetter(1, 26);
                             item.downlist = [];
-                            item.downlist.push({text: "信息", value: "message"});
+                            item.downlist.push({text: "修改", value: "message"});
                             item.downlist.push({text: "删除", value: "delete"});
                             item.datalist = [];
                             item.datalist.push({key: "group-id", value: o.gropId});
                             item.datalist.push({key: "group-name", value: o.gropName});
+                            item.datalist.push({key: "group-sum", value: o.sum});
+                            item.datalist.push({key: "group-color", value: item.color});
+                            item.datalist.push({key: "group-icon", value: item.icon});
+                            item.datalist.push({key: "group-info", value: "group-info"});
                             list.push(item);
                         }
                         funChat.List.updateList("chats", list);
@@ -147,6 +151,25 @@
                             });
                     }
                 })
+        },
+        updateChat: function (item) {
+            var chat_head = $('.chat .chat-header .chat-header-user');
+            chat_head.empty();
+            chat_head.append(
+                '<div class="avatar-group">\n' +
+                '    <figure class="avatar avatar-lg">\n' +
+                '            <span class="avatar-title bg-' + item.color + ' rounded-circle">\n' +
+                '                ' + item.icon + '\n' +
+                '            </span>\n' +
+                '    </figure>\n' +
+                '</div>\n' +
+                '<div>\n' +
+                '    <h5>' + item.name + '</h5>\n' +
+                '    <small class="text-muted">\n' +
+                '        <i>ID: ' + item.id + ', 人数: ' + item.sum + '</i>\n' +
+                '    </small>\n' +
+                '</div>');
+            $('.chat').attr("data-chat-group-id", item.id);
         }
     };
 
@@ -327,6 +350,23 @@
         list.items.push({text: "邮箱", content: $(this).data("user-email")});
         list.items.push({text: "签名", content: $(this).data("user-sign")});
         funChat.Info.updateInfo(e, list);
+    });
+
+    //群聊切换点击
+    $(document).on("click", "[data-group-info]", function () {
+        item = {};
+        item.id = $(this).data("group-id");
+        item.name = $(this).data("group-name");
+        item.sum = $(this).data("group-sum");
+        item.color = $(this).data("group-color");
+        item.icon = $(this).data("group-icon");
+        iNdex.updateChat(item);
+    });
+
+    $(document).on("click", "#chat-send", function () {
+        var toGroupId = $('.chat').data('chat-group-id');
+        var contentText = $("#chat-input").val();
+        iNdex.sendGroupMessage(toGroupId, contentText);
     });
 
     //删除群聊
