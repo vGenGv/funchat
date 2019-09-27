@@ -52,7 +52,6 @@
     <!-- 添加好友模态框 -->
     <div class="modal fade" id="addFriends" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-
         <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -71,29 +70,12 @@
                                 <input type="text" class="form-control">
                             </div>
                             <div class="col-auto">
-                                <button type="button" class="btn btn-primary">搜索</button>
+                                <button type="button" data-modal-button="search" class="btn btn-primary">搜索</button>
                             </div>
                         </div>
                     </form>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row align-items-center justify-content-center">
-                                <div class="avatar-group">
-                                    <figure class="avatar avatar-lg">
-                                    <span class="avatar-title bg-warning rounded-circle">
-                                        A
-                                    </span>
-                                    </figure>
-                                </div>
-                                <div class="col-5">
-                                    <h4>好友1</h4>
-                                    <p>ID:000</p>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn btn-primary">添加</button>
-                                </div>
-                            </div>
-                        </li>
+                        <!-- 列表内容动态添加 -->
                     </ul>
                 </div>
             </div>
@@ -123,7 +105,7 @@
                                 <input type="text" class="form-control">
                             </div>
                             <div class="col-auto">
-                                <button type="button" class="btn btn-primary">搜索</button>
+                                <button type="button" data-modal-button="search" class="btn btn-primary">搜索</button>
                             </div>
                         </div>
                     </form>
@@ -324,7 +306,7 @@
     </div>
     <!-- ./ setting modal -->
 
-    <!-- edit profile modal -->
+    <!-- 编辑个人资料模态框 -->
     <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
@@ -450,7 +432,7 @@
             </div>
         </div>
     </div>
-    <!-- ./ edit profile modal -->
+    <!-- ./ 编辑个人资料模态框 -->
 
     <!-- 整体布局 -->
     <div class="layout">
@@ -526,9 +508,8 @@
                                     <i class="fa fa-users"></i>
                                 </a>
                             </li>
-                            <li class="list-inline-item">
-                                <a class="btn btn-light" data-toggle="tooltip" title="加入群聊" href="#"
-                                   data-navigation-target="friends">
+                            <li class="list-inline-item" data-toggle="tooltip" title="加入群聊">
+                                <a class="btn btn-light" href="#" data-toggle="modal" data-target="#joinGroups">
                                     <i class="ti-comment-alt"></i>
                                 </a>
                             </li>

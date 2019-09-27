@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -101,6 +102,34 @@ public class UserServiceImpl implements UserService {
         if (userId == null)
             return null;
         return userMapper.selectByPrimaryKey(userId);
+    }
+
+    /**
+     * 搜索用户-根据名称或ID
+     *
+     * @param s 搜索字符串-名称或ID
+     * @return 搜索结果列表
+     */
+    @Override
+    @Transactional
+    public List<User> searchUserByIdOrName(String s) {
+        List<User> users = new ArrayList<>();
+        if (StringUtils.isBlank(s))
+            return users;
+        //根据名称搜索
+        User param_user = new User();
+        param_user.setUsername(s);
+        users = userMapper.selectBySelective(param_user);
+        try {
+            //根据ID搜索
+            Integer id = Integer.valueOf(s);
+            param_user.setUsername(null);
+            param_user.setId(id);
+            users.addAll(userMapper.selectBySelective(param_user));
+        } catch (Exception e) {
+            return users;
+        }
+        return users;
     }
 
 }
