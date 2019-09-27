@@ -15,7 +15,7 @@
             listDom: function (item) {
                 var str = '<li class="list-group-item"';
                 var datalist = item.datalist ? item.datalist : [];
-                for (i = 0; i < datalist.length; i++) {
+                for (var i = 0; i < datalist.length; i++) {
                     if (typeof (datalist[i].key) != "undefined")
                         str += ' data-' + datalist[i].key + '="' + datalist[i].value + '" ';
                 }
