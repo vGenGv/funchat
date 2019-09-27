@@ -53,6 +53,8 @@
         )
     });
 
+
+
     //初始化
     $(document).ready(function () {
         funChat.Started.pageLoadingClose();
