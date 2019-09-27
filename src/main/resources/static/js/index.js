@@ -8,35 +8,51 @@
     var iNdex = {
         Ws: {
             ws: undefined,
-            openWebSocket: function () {
+            openWebSocket: function (func) {
                 if (typeof (WebSocket) == "undefined") {
-                    console.log("openSocket: 您的浏览器不支持WebSocket");
+                    console.log("openSocket: 您的浏览器不支持 WebSocket");
                 } else {
-                    console.log("openSocket: 您的浏览器支持WebSocket");
-                    var socketUrl = "ws://" + window.location.host + "/websocket?userID=" + $("#userId").val();
-                    socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
+                    console.log("openSocket: 您的浏览器支持 WebSocket");
+                    var socketUrl = "ws://" + window.location.host + "/websocket";
                     console.log(socketUrl);
-                    socket = new WebSocket(socketUrl);
+                    this.ws = new WebSocket(socketUrl);
                     //打开事件
-                    socket.onopen = function () {
-                        console.log("websocket已打开");
+                    this.ws.onopen = function () {
+                        console.log("Websocket 已打开");
+                        if (typeof (func) == "function")
+                            this.onMessage = func;
                     };
                     //获得消息事件
-                    socket.onmessage = function (msg) {
-                        console.log("接收消息");
-                        console.log(msg.data);
-                        //发现消息进入    开始处理前端触发逻辑
+                    this.ws.onmessage = function (msg) {
+                        console.log("接收消息:" + msg.data);
+                        if (typeof (this.onMessage) == "function")
+                            this.onMessage(msg.data);
                     };
                     //关闭事件
-                    socket.onclose = function () {
-                        console.log("websocket已关闭");
+                    this.ws.onclose = function () {
+                        console.log("Websocket 已关闭");
                     };
                     //发生了错误事件
-                    socket.onerror = function () {
-                        console.log("websocket发生了错误");
+                    this.ws.onerror = function () {
+                        console.log("Websocket 发生了错误");
                     }
                 }
-            }
+            },
+            sendMessage: function (data) {
+                if (data)
+                    this.ws.send(data);
+            },
+            onMessage: undefined
+        },
+        Group: {
+            current: 0
+        },
+        sendFriendMessage: function (friendId) {
+            iNdex.Ws.sendMessage('[{"cmd":"updateUi","toUserId":"' + friendId + '"}]');
+        },
+        sendGroupMessage: function (groupId, content) {
+            iNdex.Ws.sendMessage(
+                '[{"cmd":"sendMessage","toGroupId":"' + groupId + '","contentText":"' + content + '"}]');
         },
         displayGroup: function () {
             funChat.Utils.jsonAjax("/GroupControl", "post",
@@ -134,11 +150,24 @@
         }
     };
 
+    //消息处理
+    var messageHandle = function (json_str) {
+        var data = $.parseJSON(json_str);
+        switch (data.cmd) {
+            case "updateUi":
+                iNdex.displayFriend();
+                break;
+            case "sendMessage":
+                break;
+        }
+    };
+
     //初始化
     $(document).ready(function () {
         funChat.Started.pageLoadingClose();
         iNdex.displayGroup();
         iNdex.displayFriend();
+        iNdex.Ws.openWebSocket(messageHandle);
     });
 
     //搜索好友按钮点击
@@ -172,6 +201,7 @@
         funChat.Utils.jsonAjax("/FriendControl", "post",
             {func: "addFriend", friendId: user_id}, {
                 success_call: function (map) {
+                    iNdex.sendFriendMessage(user_id);
                     alert("发送好友请求成功！");
                 },
                 failed_call: function (map) {
@@ -188,6 +218,7 @@
             {func: "deleteFriend", friendId: user_id}, {
                 success_call: function (map) {
                     o.remove();
+                    iNdex.sendFriendMessage(user_id);
                     var oo = $(".sidebar-group .sidebar#contact-information");
                     oo.removeClass("active");
                     oo.closest(".sidebar-group").removeClass("mobile-open");
@@ -207,6 +238,7 @@
             {func: "acceptFriend", friendId: user_id}, {
                 success_call: function (map) {
                     iNdex.displayFriend();
+                    iNdex.sendFriendMessage(user_id);
                     var oo = $(".sidebar-group .sidebar#contact-information");
                     oo.removeClass("active");
                     oo.closest(".sidebar-group").removeClass("mobile-open");
@@ -316,7 +348,7 @@
                         {
                             success_call: function (map) {
                                 o.remove();
-                                alert("您已解散本群:"+group_id);
+                                alert("您已解散本群:" + group_id);
                             }
                         });
                 },
