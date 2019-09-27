@@ -215,6 +215,23 @@
             })
     });
 
+    //加入群聊按钮点击
+    $(document).on("click", "#joinGroups [data-list-button='join']", function () {
+        var group_id = $(this).closest(".list-group-item").data("group-id");
+        funChat.Utils.jsonAjax("/GroupControl", "post",
+            {func: "joinGroup", groupId: group_id},
+            {
+                success_call: function (map) {
+                    alert("加入群聊成功！");
+                    $("#joinGroups").modal('hide');
+                    iNdex.displayGroup();
+                },
+                failed_call: function (map) {
+                    alert("加入群聊失败！");
+                }
+            })
+    });
+
     //用户信息显示点击
     $(document).on("click", "[data-user-info]", function () {
         var e = $(this).data("user-info");
@@ -245,8 +262,16 @@
             {
                 success_call: function (map) {
                     //删除这个类为 list-group-item 的整个对象
-                    o.remove();
-                    alert("删除groupId为" + group_id + "的群成功！");
+                    //o.remove();
+                    alert("您是群主！");
+                    funChat.Utils.jsonAjax("/GroupControl", "post",
+                        {func: "deleteGroup", groupId: group_id},
+                        {
+                            success_call: function (map) {
+                                o.remove();
+                                alert("您已解散本群:"+group_id);
+                            }
+                        });
                 },
                 failed_call: function (map) {
                     alert("isOwner: false, 不是群主，没有权限！");
