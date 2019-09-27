@@ -16,12 +16,12 @@ public interface ChatGroupMapper {
     List<ChatGroup> selectChatGroupsByUserId(Integer id);
 
     /**
-     * 查找某个群聊
+     * 选择性查找
      *
-     * @param grop_name 群聊名称
-     * @return 查找结果
+     * @param chatGroup 要查找的群聊信息
+     * @return 找到的群聊信息数组
      */
-    List<ChatGroup> selectChatGroupByGroupName(String grop_name);
+    List<ChatGroup> selectBySelective(ChatGroup chatGroup);
 
     int deleteByPrimaryKey(Integer gropId);
 
@@ -34,7 +34,5 @@ public interface ChatGroupMapper {
     int updateByPrimaryKeySelective(ChatGroup record);
 
     int updateByPrimaryKey(ChatGroup record);
-
-    List<ChatGroup> selectByIdOrName(ChatGroup record);
 
 }

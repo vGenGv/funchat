@@ -98,6 +98,31 @@
             })
     });
 
+    //搜索群聊按钮点击
+    $(document).on("click", "#joinGroups [data-modal-button='search']", function () {
+        var search_name = $(this).closest("form").find("input").val();
+        funChat.Utils.jsonAjax("/GroupControl", "post",
+            {func: "searchGroup", searchIdOrName: search_name}, {
+                success_call: function (map) {
+                    var list = [];
+                    for (var i = 0; i < map.return.length; i++) {
+                        var item = {};
+                        var o = map.return[i];
+                        item.title = o.gropName;
+                        item.description = "ID: " + o.gropId + ", 人数: " + o.sum;
+                        item.color = funChat.Utils.color.green;
+                        item.icon = funChat.Utils.randomLetter(1, 26);
+                        item.button_text = "加入";
+                        item.button_value = "join";
+                        item.datalist = [];
+                        item.datalist.push({key: "group-id", value: o.gropId ? o.gropId : ""});
+                        list.push(item);
+                    }
+                    funChat.Search.updateList("joinGroups", list);
+                }
+            })
+    });
+
     $(document).on("click", "#chats [data-list-dropdown='delete']", function () {
         // 这个this指向当前点击对象,this是JS对象的一个特殊指针，它的指向根据环境不同而发生变化
         var o = $(this).closest(".list-group-item");

@@ -36,7 +36,7 @@
     from fun_user u
     <where>
       <if test="id != null">
-        and id = #{id,jdbcType=VARCHAR}
+        and id = #{id,jdbcType=INTEGER}
       </if>
       <if test="username != null">
         and username = #{username,jdbcType=VARCHAR}
