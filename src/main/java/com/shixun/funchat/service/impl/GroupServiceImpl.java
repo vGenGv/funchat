@@ -68,6 +68,8 @@ public class GroupServiceImpl implements GroupService {
         ChatGroup chatGroup = chatGroupMapper.selectByPrimaryKey(groupId);
         if (chatGroup == null) //群聊不存在
             return false;
+        if (hasMember(groupId, userId)) //已经是成员
+            return false;
         //群聊人数+1
         chatGroup.setSum(chatGroup.getSum() + 1);
         chatGroupMapper.updateByPrimaryKey(chatGroup);

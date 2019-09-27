@@ -262,6 +262,23 @@
             })
     });
 
+    //加入群聊按钮点击
+    $(document).on("click", "#joinGroups [data-list-button='join']", function () {
+        var group_id = $(this).closest(".list-group-item").data("group-id");
+        funChat.Utils.jsonAjax("/GroupControl", "post",
+            {func: "joinGroup", groupId: group_id},
+            {
+                success_call: function (map) {
+                    alert("加入群聊成功！");
+                    $("#joinGroups").modal('hide');
+                    iNdex.displayGroup();
+                },
+                failed_call: function (map) {
+                    alert("加入群聊失败！");
+                }
+            })
+    });
+
     //用户信息显示点击
     $(document).on("click", "[data-user-info]", function () {
         var e = $(this).data("user-info");
@@ -292,8 +309,16 @@
             {
                 success_call: function (map) {
                     //删除这个类为 list-group-item 的整个对象
-                    o.remove();
-                    alert("删除groupId为" + group_id + "的群成功！");
+                    //o.remove();
+                    alert("您是群主！");
+                    funChat.Utils.jsonAjax("/GroupControl", "post",
+                        {func: "deleteGroup", groupId: group_id},
+                        {
+                            success_call: function (map) {
+                                o.remove();
+                                alert("您已解散本群:"+group_id);
+                            }
+                        });
                 },
                 failed_call: function (map) {
                     alert("isOwner: false, 不是群主，没有权限！");
@@ -303,6 +328,7 @@
     });
 
 
+    //弹出群聊信息模态框
     $(document).on("click", ".list-group-item [data-list-dropdown='message']", function () {
         var o = $(this).closest(" .list-group-item");
         var group_id = o.data("group-id");
@@ -311,11 +337,9 @@
 
         //attr('id',"idname")为id为upgrade_groupName的父元素中最近的的div添加一个id为 group_id
         $("#upgrade_groupName").closest("div").attr('id', group_id);
-
-        //var group_name = o.data("group-name");
-
     });
 
+    //修改群聊名称
     $("#update_group_info_btn").on('click', function () {
         //获取id为 upgrade_groupName 的修改后的group_name
         var group_name = $("#upgrade_groupName").val();
@@ -340,5 +364,24 @@
             }
         )
 
+    });
+
+    //添加群聊
+    $(document).on('click', "#newGroup .modal-footer .btn", function () {
+        var group_name = $(".form-group #group_name").val();
+        //console.log(group_name);
+        funChat.Utils.jsonAjax("/GroupControl", "post",
+            {func: "createGroup", groupName: group_name},
+            {
+                success_call: function (map) {
+                    alert("创建新的群聊成功！");
+                    $("#newGroup").modal('hide');
+                    iNdex.displayGroup();
+                },
+                failed_call: function (map) {
+                    alert("参数错误！");
+                }
+            }
+        )
     });
 });
