@@ -330,6 +330,71 @@
     });
 
 
+    /*
+        var o = $("#android_info");
+        o.attr("data-user-id", map.return.id);
+        o.attr("data-user-name", map.return.username);
+        o.attr("data-user-gender", map.return.geder);
+        o.attr("data-user-tel", map.return.telephone);
+        o.attr("data-user-email", map.return.mail);
+        o.attr("data-user-addr", map.return.addr);
+        o.attr("data-user-sign", map.return.perSignature);
+        o.attr("data-user-birthday", map.return.birthday);
+        o.attr("data-user-color", funChat.Utils.color.green);
+        o.attr("data-user-icon", "U");
+
+        */
+
+    //修改个人信息点击
+    $(document).on("click", "[data-target='#editProfileModal']", function () {
+        var o = $("#android_info");
+        var _username = o.data("user-name");
+        var _geder = o.data("user-gender");
+        var _telephone = o.data("user-tel");
+        var _mail = o.data("user-email");
+        var _addr = o.data("user-addr");
+        var _perSignature = o.data("user-sign");
+        var _birthday = o.data("user-birthday");
+        $("#editProfileModal .form-group #username").val(_username);
+        $("#editProfileModal .form-group #gender").val(_geder);
+        $("#editProfileModal .form-group #telephone").val(_telephone);
+        $("#editProfileModal .form-group #mail").val(_mail);
+        $("#editProfileModal .form-group #addr").val(_addr);
+        $("#editProfileModal .form-group #perSignature").val(_perSignature);
+        $("#editProfileModal .form-group #birthday ").val(_birthday);
+    });
+
+    $(document).on("click", "#save_user_info", function () {
+        var _username = $("#editProfileModal .form-group #username").val();
+        var _geder = $("#editProfileModal .form-group #gender").val();
+        var _telephone = $("#editProfileModal .form-group #telephone").val();
+        var _mail = $("#editProfileModal .form-group #mail").val();
+        var _addr = $("#editProfileModal .form-group #addr").val();
+        var _perSignature = $("#editProfileModal .form-group #perSignature").val();
+        var _birthday = $("#editProfileModal .form-group #birthday ").val();
+
+        funChat.Utils.jsonAjax("/UserControl", "post",
+            {
+                func: "updateUserInfo",
+                username: _username,
+                geder: _geder,
+                birthday: _birthday,
+                telephone: _telephone,
+                addr: _addr,
+                mail: _mail,
+                perSignature: _perSignature
+            },
+            {
+                success_call: function (map) {
+                    alert("修改信息成功！");
+                    $("#editProfileModal").modal('hide');
+                },
+                failed_call: function (map) {
+                    alert("修改信息错误！");
+                }
+            });
+    });
+
     //搜索群聊按钮点击
     $(document).on("click", "#joinGroups [data-modal-button='search']", function () {
         var search_name = $(this).closest("form").find("input").val();
