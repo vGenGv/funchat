@@ -89,7 +89,17 @@
                 {func: "getUserInfo"},
                 {
                     success_call:function (map) {
-                        $("")
+                        var o = $("#android_info");
+                        o.attr("data-user-name", map.return.username);
+                        o.attr("data-user-gender", map.return.geder);
+                        o.attr("data-user-tel", map.return.telephone);
+                        o.attr("data-user-email", map.return.mail);
+                        o.attr("data-user-addr", map.return.addr);
+                        o.attr("data-user-sign", map.return.perSignature);
+                        o.attr("data-user-birthday", map.return.birthday);
+                        o.attr("data-user-color", funChat.Utils.color.green);   //.....
+                        o.attr("data-user-icon", "U");
+
                     }
                 })
         },
@@ -204,6 +214,7 @@
         funChat.Started.pageLoadingClose();
         iNdex.displayGroup();
         iNdex.displayFriend();
+        iNdex.displaySelf();
         iNdex.Ws.openWebSocket(messageHandle);
     });
 
