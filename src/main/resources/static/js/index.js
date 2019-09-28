@@ -329,22 +329,6 @@
         e.stopPropagation();
     });
 
-
-    /*
-        var o = $("#android_info");
-        o.attr("data-user-id", map.return.id);
-        o.attr("data-user-name", map.return.username);
-        o.attr("data-user-gender", map.return.geder);
-        o.attr("data-user-tel", map.return.telephone);
-        o.attr("data-user-email", map.return.mail);
-        o.attr("data-user-addr", map.return.addr);
-        o.attr("data-user-sign", map.return.perSignature);
-        o.attr("data-user-birthday", map.return.birthday);
-        o.attr("data-user-color", funChat.Utils.color.green);
-        o.attr("data-user-icon", "U");
-
-        */
-
     //修改个人信息点击
     $(document).on("click", "[data-target='#editProfileModal']", function () {
         var o = $("#android_info");
@@ -388,6 +372,7 @@
                 success_call: function (map) {
                     alert("修改信息成功！");
                     $("#editProfileModal").modal('hide');
+                    iNdex.displaySelf();
                 },
                 failed_call: function (map) {
                     alert("修改信息错误！");

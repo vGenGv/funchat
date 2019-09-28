@@ -81,8 +81,10 @@ public class UserServiceImpl implements UserService {
             User user_find = new User();
             user_find.setUsername(user.getUsername());
             List<User> users = userMapper.selectBySelective(user_find);
-            if (!users.isEmpty()) //用户名已存在
-                return null;
+            if (!users.isEmpty()) { //用户名已存在
+                if (users.get(0).getId() != user.getId())
+                    return null;
+            }
         }
         if (user.getPassword() != null && StringUtils.isBlank(user.getPassword())) //要修改密码
             return null;
