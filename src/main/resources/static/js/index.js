@@ -104,7 +104,6 @@
                 })
         },
 
-
         displayFriend: function () {
             var list = [];
             funChat.Utils.jsonAjax("/FriendControl", "post",
@@ -202,8 +201,22 @@
         switch (data.cmd) {
             case "updateUi":
                 iNdex.displayFriend();
+                iNdex.displayGroup();
                 break;
             case "sendMessage":
+                var user_id = $("android_info").data("user-id");
+                var o = $(".chat .chat-body .messages");
+                o.append(
+                    '<div class="message-item ' + ((data.fromUserId === user_id) ? 'outgoing-message' : ' ') + '">\n' +
+                    '    <div class="message-content">\n' +
+                    '        ' + data.contentText + '\n' +
+                    '    </div>\n' +
+                    '    <div class="message-action">\n' +
+                    '        来自: ' + data.fromUserName + '(' + data.fromUserId + ')\n' +
+                    '    </div>\n' +
+                    '</div>');
+                var oo = $(".chat .chat-body");
+                oo.scrollTop(oo.get(0).scrollHeight, -1);
                 break;
         }
     };
