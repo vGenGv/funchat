@@ -47,10 +47,11 @@
         <!-- login_form -->
         <form id="login_form" style="display: block">
             <div class="form-group input-group-lg">
-                <input type="text" class="form-control" id="username" placeholder="用户名" required autofocus>
+                <input type="text" class="form-control" id="username" placeholder="用户名" required autofocus
+                       autocomplete="on">
             </div>
             <div class="form-group input-group-lg">
-                <input type="password" class="form-control" id="password" placeholder="密码" required>
+                <input type="password" class="form-control" id="password" placeholder="密码" required autocomplete="off">
             </div>
             <div class="form-group d-flex justify-content-between">
                 <div class="custom-control custom-checkbox">
@@ -108,16 +109,16 @@
         <!--register_form-->
         <form id="register_form" style="display: none">
             <div class="form-group input-group-lg">
-                <input id="email" type="email" class="form-control" placeholder="邮箱" required autofocus>
+                <input id="remail" type="email" class="form-control" placeholder="邮箱" required autofocus>
             </div>
             <div class="form-group input-group-lg">
-                <input id="telephone" type="text" class="form-control" placeholder="电话" required>
+                <input id="rtelephone" type="text" class="form-control" placeholder="电话" required>
             </div>
             <div class="form-group input-group-lg">
-                <input id="username" type="text" class="form-control" placeholder="用户名" required>
+                <input id="rusername" type="text" class="form-control" placeholder="用户名" required>
             </div>
             <div class="form-group input-group-lg">
-                <input id="password" type="password" class="form-control" placeholder="密码" required>
+                <input id="rpassword" type="password" class="form-control" placeholder="密码" required autocomplete="off">
             </div>
             <button data-my-button-click="regist" type="button" class="btn btn-primary btn-lg btn-block">注册</button>
             <hr>

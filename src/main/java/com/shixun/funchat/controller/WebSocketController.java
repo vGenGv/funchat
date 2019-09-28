@@ -65,7 +65,12 @@ public class WebSocketController implements WebSocketHandler {
                         throw new MyException(MyExceptionType.Success);
                     }
                     case "sendMessage": {
-                        Integer toGroupId = json_msg.getInteger("toGroupId");
+                        Integer toGroupId;
+                        try {
+                            toGroupId = json_msg.getInteger("toGroupId");
+                        } catch (NumberFormatException e) {
+                            throw new MyException(MyExceptionType.Failed);
+                        }
                         String contentText = json_msg.getString("contentText");
                         if (toGroupId == null || StringUtils.isBlank(contentText))
                             throw new MyException(MyExceptionType.ParamError);

@@ -37,14 +37,16 @@
                     },
                     failed_call: function () {
                         alert("登陆失败！可能的原因：用户名或密码不正确");
+                    },
+                    error_call:function () {
+                        alert("登录失败！可能的原因：用户名或密码为空");
                     }
                 });
         } else if (e === "regist") {
-            username = o.find("#username").val();
-            password = o.find("#password").val();
-            telephone = o.find("#telephone").val();
-            email = o.find("#email").val();
-            alert("123");
+            username = o.find("#rusername").val();
+            password = o.find("#rpassword").val();
+            telephone = o.find("#rtelephone").val();
+            email = o.find("#remail").val();
             funChat.Utils.jsonAjax("/UserControlPublic", "post",
                 {func: "regist", username: username, password: password, telephone: telephone, mail: email},
                 {
@@ -59,10 +61,16 @@
                                 },
                                 failed_call: function () {
                                     alert("登陆失败！可能的原因：用户名或密码不正确");
+                                },
+                                error_call:function () {
+                                    alert("登录失败！可能的原因：用户名或密码为空");
                                 }
                             });
                     },
                     failed_call: function () {
+                        alert("注册失败！可能的原因：用户名已存在/用户名或密码为空");
+                    },
+                    error_call:function () {
                         alert("注册失败！可能的原因：用户名已存在/用户名或密码为空");
                     }
                 });

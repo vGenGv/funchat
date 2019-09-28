@@ -204,10 +204,10 @@
                 iNdex.displayGroup();
                 break;
             case "sendMessage":
-                var user_id = $("android_info").data("user-id");
+                var user_id = $("#android_info").data("user-id");
                 var o = $(".chat .chat-body .messages");
                 o.append(
-                    '<div class="message-item ' + ((data.fromUserId === user_id) ? 'outgoing-message' : ' ') + '">\n' +
+                    '<div class="message-item ' + ((data.fromUserId == user_id) ? 'outgoing-message' : ' ') + '">\n' +
                     '    <div class="message-content">\n' +
                     '        ' + data.contentText + '\n' +
                     '    </div>\n' +
