@@ -84,12 +84,13 @@
                 })
         },
 
-        displaySelf: function(){
+        displaySelf: function () {
             funChat.Utils.jsonAjax("/UserControl", "post",
                 {func: "getUserInfo"},
                 {
-                    success_call:function (map) {
+                    success_call: function (map) {
                         var o = $("#android_info");
+                        o.attr("data-user-id", map.return.id);
                         o.attr("data-user-name", map.return.username);
                         o.attr("data-user-gender", map.return.geder);
                         o.attr("data-user-tel", map.return.telephone);
@@ -97,13 +98,11 @@
                         o.attr("data-user-addr", map.return.addr);
                         o.attr("data-user-sign", map.return.perSignature);
                         o.attr("data-user-birthday", map.return.birthday);
-                        o.attr("data-user-color", funChat.Utils.color.green);   //.....
+                        o.attr("data-user-color", funChat.Utils.color.green);
                         o.attr("data-user-icon", "U");
-
                     }
                 })
         },
-
 
 
         displayFriend: function () {
@@ -317,6 +316,7 @@
         e.stopPropagation();
     });
 
+
     //搜索群聊按钮点击
     $(document).on("click", "#joinGroups [data-modal-button='search']", function () {
         var search_name = $(this).closest("form").find("input").val();
@@ -376,6 +376,7 @@
         list.items.push({text: "签名", content: $(this).data("user-sign")});
         funChat.Info.updateInfo(e, list);
     });
+
 
     //群聊切换点击
     $(document).on("click", "[data-group-info]", function () {
