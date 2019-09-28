@@ -83,6 +83,19 @@
                     }
                 })
         },
+
+        displaySelf: function(){
+            funChat.Utils.jsonAjax("/UserControl", "post",
+                {func: "getUserInfo"},
+                {
+                    success_call:function (map) {
+                        $("")
+                    }
+                })
+        },
+
+
+
         displayFriend: function () {
             var list = [];
             funChat.Utils.jsonAjax("/FriendControl", "post",
@@ -141,6 +154,7 @@
                                         item.datalist.push({key: "user-birthday", value: o.birthday ? o.birthday : ""});
                                         item.datalist.push({key: "user-color", value: item.color});
                                         item.datalist.push({key: "user-icon", value: item.icon});
+
                                         item.datalist.push({key: "my-toggle", value: "navigation"});
                                         item.datalist.push({key: "my-target", value: "contact-information"});
                                         item.datalist.push({key: "user-info", value: "contact-information"});
