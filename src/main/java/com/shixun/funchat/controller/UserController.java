@@ -168,7 +168,7 @@ public class UserController {
                     param_user.setGeder(jsonObject.getString("geder"));
                     param_user.setBirthday(jsonObject.getDate("birthday"));
                     param_user.setTelephone(jsonObject.getLong("telephone"));
-                    param_user.setAddr(jsonObject.getString("telephone"));
+                    param_user.setAddr(jsonObject.getString("addr"));
                     param_user.setMail(jsonObject.getString("mail"));
                     param_user.setPerSignature(jsonObject.getString("perSignature"));
                     User rs_user = userService.updateUserInfo(param_user);
